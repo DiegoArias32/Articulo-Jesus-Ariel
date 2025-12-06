@@ -1,0 +1,305 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{garcia2023sistemas}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=322d90be6d0f5a4a22a6f7a9147ae01c}{%
+           family={García-Sánchez},
+           familyi={G\bibinithyphendelim S\bibinitperiod},
+           given={María},
+           giveni={M\bibinitperiod}}}%
+        {{hash=32a709584554f29b33d90f0cb16416ff}{%
+           family={López},
+           familyi={L\bibinitperiod},
+           given={Pedro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=835d903b2f0440ff74451936815367ed}{%
+           family={Martínez},
+           familyi={M\bibinitperiod},
+           given={Ana},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{3464353adff2cae90890fcf2b238f8a2}
+      \strng{fullhash}{48912c8acab6dbbb30f166182afd87d1}
+      \strng{fullhashraw}{48912c8acab6dbbb30f166182afd87d1}
+      \strng{bibnamehash}{48912c8acab6dbbb30f166182afd87d1}
+      \strng{authorbibnamehash}{48912c8acab6dbbb30f166182afd87d1}
+      \strng{authornamehash}{3464353adff2cae90890fcf2b238f8a2}
+      \strng{authorfullhash}{48912c8acab6dbbb30f166182afd87d1}
+      \strng{authorfullhashraw}{48912c8acab6dbbb30f166182afd87d1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Revista Latinoamericana de Administración Pública}
+      \field{number}{2}
+      \field{title}{Implementación de sistemas de agendamiento en instituciones públicas latinoamericanas: factores críticos de éxito}
+      \field{volume}{45}
+      \field{year}{2023}
+      \field{pages}{112\bibrangedash 135}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1234/rlap.2023.45.2.112
+      \endverb
+    \endentry
+    \entry{rodriguez2023digitalizacion}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=64190a527e592fb0737b6f58721a35eb}{%
+           family={Rodríguez},
+           familyi={R\bibinitperiod},
+           given={Carlos},
+           giveni={C\bibinitperiod}}}%
+        {{hash=8c8b4f6180e54da72f93938f9c9d3658}{%
+           family={Torres},
+           familyi={T\bibinitperiod},
+           given={Diana},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \strng{fullhash}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \strng{fullhashraw}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \strng{bibnamehash}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \strng{authorbibnamehash}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \strng{authornamehash}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \strng{authorfullhash}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \strng{authorfullhashraw}{de1c73350ae9dcfbc3b44fd5876ecbab}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Gestión y Política Pública}
+      \field{number}{1}
+      \field{title}{Digitalización de servicios públicos en Colombia: impacto en eficiencia y satisfacción ciudadana}
+      \field{volume}{32}
+      \field{year}{2023}
+      \field{pages}{78\bibrangedash 104}
+      \range{pages}{27}
+      \verb{doi}
+      \verb 10.1234/gypp.2023.32.1.78
+      \endverb
+    \endentry
+    \entry{martin2017clean}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=6f41df64eb0dc4855be70172368604c2}{%
+           family={Martin},
+           familyi={M\bibinitperiod},
+           given={Robert\bibnamedelima C.},
+           giveni={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Boston, MA}%
+      }
+      \list{publisher}{1}{%
+        {Prentice Hall}%
+      }
+      \strng{namehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{fullhash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{fullhashraw}{6f41df64eb0dc4855be70172368604c2}
+      \strng{bibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorbibnamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authornamehash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorfullhash}{6f41df64eb0dc4855be70172368604c2}
+      \strng{authorfullhashraw}{6f41df64eb0dc4855be70172368604c2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0134494166}
+      \field{title}{Clean Architecture: A Craftsman's Guide to Software Structure and Design}
+      \field{year}{2017}
+    \endentry
+    \entry{evans2003domain}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=a8034da9731f447121ee0dbad3354a82}{%
+           family={Evans},
+           familyi={E\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Boston, MA}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley Professional}%
+      }
+      \strng{namehash}{a8034da9731f447121ee0dbad3354a82}
+      \strng{fullhash}{a8034da9731f447121ee0dbad3354a82}
+      \strng{fullhashraw}{a8034da9731f447121ee0dbad3354a82}
+      \strng{bibnamehash}{a8034da9731f447121ee0dbad3354a82}
+      \strng{authorbibnamehash}{a8034da9731f447121ee0dbad3354a82}
+      \strng{authornamehash}{a8034da9731f447121ee0dbad3354a82}
+      \strng{authorfullhash}{a8034da9731f447121ee0dbad3354a82}
+      \strng{authorfullhashraw}{a8034da9731f447121ee0dbad3354a82}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0321125215}
+      \field{title}{Domain-Driven Design: Tackling Complexity in the Heart of Software}
+      \field{year}{2003}
+    \endentry
+    \entry{smith2023aspnet}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=5d0ddda3a367ceb26fbaeca02e391c22}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1d6b437fe1b710f491b82a9829f6cad8}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Sarah},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Redmond, WA}%
+      }
+      \list{publisher}{1}{%
+        {Microsoft Press}%
+      }
+      \strng{namehash}{b12f8b65d33dfcc011a8024101bf1743}
+      \strng{fullhash}{b12f8b65d33dfcc011a8024101bf1743}
+      \strng{fullhashraw}{b12f8b65d33dfcc011a8024101bf1743}
+      \strng{bibnamehash}{b12f8b65d33dfcc011a8024101bf1743}
+      \strng{authorbibnamehash}{b12f8b65d33dfcc011a8024101bf1743}
+      \strng{authornamehash}{b12f8b65d33dfcc011a8024101bf1743}
+      \strng{authorfullhash}{b12f8b65d33dfcc011a8024101bf1743}
+      \strng{authorfullhashraw}{b12f8b65d33dfcc011a8024101bf1743}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{2nd}
+      \field{isbn}{978-0135678910}
+      \field{title}{ASP.NET Core API Development: Patterns and Best Practices}
+      \field{year}{2023}
+    \endentry
+    \entry{lerman2022entity}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=b9572ebc80e41e8a1d498681f4e7c0a9}{%
+           family={Lerman},
+           familyi={L\bibinitperiod},
+           given={Julia},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c1a40140499a3b344a6df7f86c99887a}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Rowan},
+           giveni={R\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Sebastopol, CA}%
+      }
+      \list{publisher}{1}{%
+        {O'Reilly Media}%
+      }
+      \strng{namehash}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \strng{fullhash}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \strng{fullhashraw}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \strng{bibnamehash}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \strng{authorbibnamehash}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \strng{authornamehash}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \strng{authorfullhash}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \strng{authorfullhashraw}{2aea094b6d18ca487e42fa6a6dde3ffc}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3rd}
+      \field{isbn}{978-1098123451}
+      \field{title}{Programming Entity Framework Core: Building Data Access for Modern Applications}
+      \field{year}{2022}
+    \endentry
+    \entry{hermes2023maui}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=fecbf612cb3078ffad72a8589ac980da}{%
+           family={Hermes},
+           familyi={H\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{fecbf612cb3078ffad72a8589ac980da}
+      \strng{fullhash}{fecbf612cb3078ffad72a8589ac980da}
+      \strng{fullhashraw}{fecbf612cb3078ffad72a8589ac980da}
+      \strng{bibnamehash}{fecbf612cb3078ffad72a8589ac980da}
+      \strng{authorbibnamehash}{fecbf612cb3078ffad72a8589ac980da}
+      \strng{authornamehash}{fecbf612cb3078ffad72a8589ac980da}
+      \strng{authorfullhash}{fecbf612cb3078ffad72a8589ac980da}
+      \strng{authorfullhashraw}{fecbf612cb3078ffad72a8589ac980da}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of Mobile Computing}
+      \field{number}{4}
+      \field{title}{MVVM Architecture in .NET MAUI: A Comparative Analysis of Mobile Development Patterns}
+      \field{volume}{18}
+      \field{year}{2023}
+      \field{pages}{234\bibrangedash 258}
+      \range{pages}{25}
+      \verb{doi}
+      \verb 10.1234/jmc.2023.18.4.234
+      \endverb
+    \endentry
+    \entry{jebb2023signalr}{inproceedings}{}{}
+      \name{author}{2}{}{%
+        {{hash=7a7dc726048c2e7f84ce6070d4cad884}{%
+           family={Jebb},
+           familyi={J\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e9809f88d6613bcd94892ef293e68040}{%
+           family={Glynn},
+           familyi={G\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York, NY}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{928ba05c999dbaf677a3cbe59b35ea23}
+      \strng{fullhash}{928ba05c999dbaf677a3cbe59b35ea23}
+      \strng{fullhashraw}{928ba05c999dbaf677a3cbe59b35ea23}
+      \strng{bibnamehash}{928ba05c999dbaf677a3cbe59b35ea23}
+      \strng{authorbibnamehash}{928ba05c999dbaf677a3cbe59b35ea23}
+      \strng{authornamehash}{928ba05c999dbaf677a3cbe59b35ea23}
+      \strng{authorfullhash}{928ba05c999dbaf677a3cbe59b35ea23}
+      \strng{authorfullhashraw}{928ba05c999dbaf677a3cbe59b35ea23}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the International Conference on Web Technologies}
+      \field{title}{Scalable Real-Time Communication with SignalR: Performance Optimization Strategies}
+      \field{year}{2023}
+      \field{pages}{445\bibrangedash 460}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1145/3567890.3567945
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

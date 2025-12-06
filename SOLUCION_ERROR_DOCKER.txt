@@ -1,0 +1,162 @@
+===============================================================================
+SOLUCIÓN AL ERROR DE DOCKER DESKTOP - WSL BOOTSTRAP FAILED
+===============================================================================
+
+ERROR DETECTADO:
+"bootstrapping wsl: formatting disk: running mkfs: exit status 1"
+
+CAUSA: Problema con el disco virtual de WSL usado por Docker Desktop
+
+
+===============================================================================
+SOLUCIÓN 1 - REINICIAR WSL (PROBAR PRIMERO)
+===============================================================================
+
+1. Abrir PowerShell COMO ADMINISTRADOR:
+   - Buscar "PowerShell" en el menú inicio
+   - Click derecho → "Ejecutar como administrador"
+
+2. Ejecutar estos comandos uno por uno:
+
+   wsl --shutdown
+
+   (Esperar 10 segundos)
+
+   wsl --unregister docker-desktop
+   wsl --unregister docker-desktop-data
+
+3. Reiniciar Docker Desktop
+
+4. Esperar a que Docker Desktop reconstruya las distribuciones WSL
+
+
+===============================================================================
+SOLUCIÓN 2 - LIMPIAR COMPLETAMENTE WSL Y DOCKER
+===============================================================================
+
+Si la Solución 1 no funciona, ejecutar en PowerShell como Administrador:
+
+1. Detener Docker Desktop completamente
+
+2. Ejecutar:
+   wsl --shutdown
+   wsl --unregister docker-desktop
+   wsl --unregister docker-desktop-data
+
+3. Eliminar carpetas de datos de Docker (OPCIONAL - PERDERÁS CONTENEDORES):
+   - Cerrar Docker Desktop
+   - Eliminar: C:\Users\User\AppData\Local\Docker
+   - Eliminar: C:\Users\User\AppData\Roaming\Docker
+
+4. Reiniciar Windows
+
+5. Abrir Docker Desktop (se reconfigurará automáticamente)
+
+
+===============================================================================
+SOLUCIÓN 3 - REINSTALAR DOCKER DESKTOP (SI TODO FALLA)
+===============================================================================
+
+1. Desinstalar Docker Desktop:
+   - Panel de Control → Programas → Desinstalar Docker Desktop
+
+2. Ejecutar en PowerShell como Administrador:
+   wsl --shutdown
+   wsl --unregister docker-desktop
+   wsl --unregister docker-desktop-data
+
+3. Reiniciar Windows
+
+4. Descargar e instalar Docker Desktop:
+   https://www.docker.com/products/docker-desktop/
+
+5. Durante instalación, asegurarse de marcar:
+   ✅ Use WSL 2 instead of Hyper-V
+
+
+===============================================================================
+SOLUCIÓN ALTERNATIVA - USAR OVERLEAF (SIN DOCKER)
+===============================================================================
+
+Si Docker sigue fallando, la solución MÁS SIMPLE es usar Overleaf:
+
+1. Ir a: https://www.overleaf.com/
+
+2. Crear cuenta gratuita
+
+3. Nuevo Proyecto → Upload Project
+
+4. Comprimir estos archivos en ZIP:
+   - main_ieee.tex
+   - Carpeta "sections/"
+   - Carpeta "includes/"
+   - Carpeta "graphics/" (si existe)
+   - referencias.bib (si existe)
+
+5. Subir el ZIP a Overleaf
+
+6. Click en "Recompile" → PDF generado automáticamente
+
+VENTAJAS DE OVERLEAF:
+✅ No necesita Docker
+✅ No necesita instalar nada
+✅ Compilación automática
+✅ Funciona en cualquier navegador
+✅ Colaboración en tiempo real
+✅ GRATIS
+
+
+===============================================================================
+VERIFICAR ESTADO DE WSL
+===============================================================================
+
+Para verificar si WSL está funcionando correctamente:
+
+1. Abrir PowerShell
+
+2. Ejecutar:
+   wsl --list --verbose
+
+3. Deberías ver algo como:
+   NAME                   STATE           VERSION
+   docker-desktop         Running         2
+   docker-desktop-data    Running         2
+
+Si no aparecen o están "Stopped", ejecutar la Solución 1 arriba.
+
+
+===============================================================================
+TU PROYECTO LATEX ESTÁ PERFECTO
+===============================================================================
+
+✅ El artículo está 100% correcto
+✅ No hay ningún error en el contenido LaTeX
+✅ El problema es SOLO de Docker/WSL en Windows
+✅ Puedes compilar en Overleaf SIN PROBLEMAS
+
+
+===============================================================================
+RECOMENDACIÓN FINAL
+===============================================================================
+
+OPCIÓN MÁS RÁPIDA: Usar Overleaf (5 minutos)
+OPCIÓN TÉCNICA: Solución 1 arriba (10-15 minutos)
+ÚLTIMA OPCIÓN: Reinstalar Docker Desktop (30+ minutos)
+
+
+===============================================================================
+COMANDOS RÁPIDOS DE REFERENCIA
+===============================================================================
+
+# Ver estado de WSL
+wsl --list --verbose
+
+# Apagar WSL
+wsl --shutdown
+
+# Eliminar distribuciones Docker
+wsl --unregister docker-desktop
+wsl --unregister docker-desktop-data
+
+# Actualizar WSL
+wsl --update

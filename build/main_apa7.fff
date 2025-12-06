@@ -1,0 +1,18 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[htbp]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/inicio_proyecto.png}
+    \caption{Flujo general del proyecto desde el análisis hasta la entrega}
+    \label{fig:inicio_proyecto}
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{graphics/ciclo_desarrollo.png}
+    \caption{Ciclo iterativo que seguimos durante el desarrollo}
+    \label{fig:ciclo_desarrollo}
+\end{figure*}

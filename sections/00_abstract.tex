@@ -1,0 +1,18 @@
+Desarrollamos un sistema completo de agendamiento de citas PQR para Electrohuila, la empresa de energía del Huila que necesitaba dejar atrás el caos de las filas eternas y los papelitos para que la gente pueda radicar sus peticiones, quejas o reclamos de manera ordenada y digital.
+El proyecto lo dividimos en tres etapas grandes: primero todo el análisis y diseño (hablamos mil horas con los usuarios de Electrohuila para entender exactamente cómo funcionaba su atención al cliente), luego la construcción propiamente dicha, y finalmente las pruebas hasta que todo quedara perfecto.
+En cuanto a la tecnología, fuimos con un stack bastante actual y potente:
+
+Backend en .NET Core 9 con una API REST bien estructurada
+El portal web para los administradores lo hicimos con Next.js 14 y TypeScript (quedó rapidísimo y súper fácil de usar)
+La app móvil (para Android y iOS con una sola base de código) la armamos en .NET MAUI
+Y la base de datos, como ellos ya trabajan con Oracle en toda la empresa, la mantuvimos en Oracle Database
+
+Todo lo diseñamos siguiendo Clean Architecture y separando bien las capas para que el sistema sea fácil de mantener y de escalar en el futuro. En la app móvil usamos MVVM, que es lo más limpio para ese tipo de proyectos.
+¿ Qué puede hacer ahora el sistema ?
+
+Los usuarios agendan su cita desde la app o la web, ven en tiempo real qué horarios están libres y reservan el que más les convenga
+Los empleados y administradores tienen un panel donde manejan sucursales, horarios, días festivos, etc.
+Hay un sistema de roles y permisos bien detallado (el de caja no ve lo mismo que el jefe de atención al cliente, por ejemplo)
+Las notificaciones en tiempo real las hicimos con SignalR: cuando se agenda, cancela o modifica una cita, todos los involucrados se enteran al instante
+
+Al final entregamos una solución robusta, moderna y que realmente les cambió la vida a los usuarios y al personal de Electrohuila. Fue de esos proyectos que te dejan con la satisfacción de haber construido algo empresarial de verdad, con buen código, bien pensado y que va a durar muchos años funcionando sin problemas.

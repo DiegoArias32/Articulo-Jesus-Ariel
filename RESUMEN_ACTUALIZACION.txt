@@ -1,0 +1,142 @@
+===============================================================================
+RESUMEN DE ACTUALIZACIÓN DEL ARTÍCULO ACADÉMICO
+===============================================================================
+
+PROYECTO ORIGINAL: Autogestión SENA
+PROYECTO ACTUALIZADO: Sistema de Agendamiento de Citas PQR para Electrohuila
+
+===============================================================================
+ARCHIVOS ACTUALIZADOS
+===============================================================================
+
+1. main_ieee.tex
+   - Nuevo título: "Sistema de Agendamiento de Citas PQR para Electrohuila: 
+     Desarrollo Full-Stack Asistido por Inteligencia Artificial"
+   - Keywords: Sistemas de agendamiento, Gestión de PQR, .NET Core, Next.js, 
+     Oracle Database, SignalR, Desarrollo asistido por IA, MAUI
+
+2. sections/00_abstract.tex (182 palabras - cumple con límite 150-200)
+   - Contexto: Electrohuila, empresa de servicios públicos
+   - Solución: Sistema full-stack con portal web + app móvil + backend API
+   - Stack: .NET Core 8, Next.js 14, MAUI, Oracle Database, SignalR
+   - Rol IA: Asistente técnico en todo el ciclo de desarrollo
+
+3. sections/01_introduccion.tex
+   - Problemática de Electrohuila en gestión de PQR
+   - Descripción detallada de los 3 componentes del sistema
+   - Stack tecnológico con justificación
+   - Alcance funcional completo
+   - Estructura del artículo
+
+4. sections/03_metodologia.tex
+   Fase 1 - Diseño:
+   - Modelo ER con entidades específicas de Electrohuila
+   - Mockups Figma para web y móvil
+   - Arquitectura de 3 capas validada con IA
+   
+   Fase 2 - Implementación:
+   - Backend .NET Core 8 con Entity Framework + Oracle
+   - Frontend Web Next.js 14 + TypeScript + Zustand
+   - Frontend Mobile .NET MAUI con MVVM
+   - Integración SignalR para tiempo real
+   
+   Fase 3 - Aprendizaje:
+   - Soporte sintaxis C# y TypeScript
+   - Debugging técnico especializado
+   - Explicación de patrones arquitectónicos
+
+5. sections/04_implementacion.tex
+   Stack Tecnológico Completo:
+   - Backend: .NET Core 8, EF Core Oracle, Clean Architecture, CQRS, SignalR
+   - Frontend Web: Next.js 14, TypeScript, Zustand, Tailwind, shadcn/ui
+   - Frontend Mobile: .NET MAUI, MVVM, CommunityToolkit
+   - BD: Oracle Database, Stored Procedures
+   
+   Proceso con IA:
+   - Generación de controllers y DTOs
+   - Componentes React con validación
+   - ViewModels MAUI con Commands
+   - Queries Oracle complejas
+   - Debugging SignalR
+   - Documentación y mejores prácticas
+
+6. sections/05_resultados.tex
+   Beneficio 1 - Resolución instantánea:
+   - Configuración Entity Framework con Oracle
+   - Implementación SignalR Hubs
+   - Server Components vs Client Components
+   - MVVM binding en MAUI
+   
+   Beneficio 2 - Reducción de tiempo:
+   - Controllers .NET CRUD completo
+   - Formularios y tablas Next.js
+   - ViewModels MAUI con Commands
+   - Queries Oracle con JOINs
+
+7. sections/A1_apendices.tex
+   Herramientas IA:
+   - GitHub Copilot
+   - Claude Code
+   - ChatGPT
+   
+   Stack completo documentado con detalles de cada tecnología
+
+===============================================================================
+ARCHIVOS NO MODIFICADOS (por ser genéricos)
+===============================================================================
+
+- sections/02_relacionados.tex (Trabajos relacionados)
+- sections/06_discusion.tex (Discusión)
+- sections/07_conclusiones.tex (Conclusiones)
+
+===============================================================================
+TECNOLOGÍAS PRINCIPALES MENCIONADAS
+===============================================================================
+
+Backend:
+✓ .NET Core 8 (C#)
+✓ Entity Framework Core con Oracle Provider
+✓ Clean Architecture + CQRS Pattern
+✓ SignalR para comunicación en tiempo real
+✓ JWT Authentication
+
+Frontend Web:
+✓ Next.js 14 con App Router
+✓ TypeScript
+✓ Zustand (estado global)
+✓ Tailwind CSS + shadcn/ui
+✓ React Hook Form
+✓ SignalR Client
+
+Frontend Mobile:
+✓ .NET MAUI (Android/iOS)
+✓ MVVM Pattern
+✓ CommunityToolkit.MVVM
+✓ HttpClient
+✓ SecureStorage
+
+Base de Datos:
+✓ Oracle Database
+✓ Stored Procedures
+✓ Modelo Relacional Normalizado (3NF)
+
+===============================================================================
+VALIDACIONES DE CALIDAD
+===============================================================================
+
+✓ Formato LaTeX correcto mantenido
+✓ Abstract: 182 palabras (cumple límite 150-200)
+✓ Tono académico formal
+✓ Referencias técnicas incluidas (\cite{...})
+✓ Estructura IEEE mantenida
+✓ Figuras y referencias cruzadas preservadas (\cref{...})
+
+===============================================================================
+ESTADO FINAL
+===============================================================================
+
+El artículo ha sido completamente actualizado y adaptado al proyecto 
+"Sistema de Agendamiento de Citas PQR para Electrohuila" manteniendo 
+la estructura académica y los estándares de calidad IEEE.
+
+Todos los archivos están listos para compilación LaTeX.

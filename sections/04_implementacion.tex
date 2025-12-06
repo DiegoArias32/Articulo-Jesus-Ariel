@@ -1,0 +1,85 @@
+\section{Implementación del software}
+
+La implementación del Sistema de Agendamiento de Citas PQR para Electrohuila fue una de las partes más intensas y satisfactorias del proyecto.
+
+\subsection{Stack tecnológico}
+Elegimos un stack moderno, empresarial y que nos diera tranquilidad a largo plazo:
+
+\subsubsection{Backend}
+\begin{itemize}
+    \item \textbf{.NET 9} → Porque es rápido, estable y tiene soporte brutal de Microsoft.
+    \item \textbf{Entity Framework Core + Oracle Provider} → Para hablar con la base de datos de Electrohuila sin dramas.
+    \item \textbf{Clean Architecture + CQRS} → Para que el código no se vuelva un desastre cuando el sistema crezca.
+    \item \textbf{SignalR} → Notificaciones en tiempo real.
+    \item \textbf{JWT + roles y permisos granulares} → Seguridad seria desde el día uno.
+\end{itemize}
+
+\subsubsection{Frontend Web (portal administrativo)}
+\begin{itemize}
+    \item \textbf{Next.js 14 (App Router + Server Components)} → Rendimiento brutal y SEO sin esfuerzo.
+    \item \textbf{TypeScript} → Para evitar errores tontos en producción.
+    \item \textbf{Zustand} → Estado global ligero y sin complicaciones.
+    \item \textbf{Tailwind + shadcn/ui} → Quedó bonito, responsivo y accesible con poco esfuerzo.
+    \item \textbf{Cliente SignalR} → Todo se actualiza al instante sin refrescar la página.
+\end{itemize}
+
+\subsubsection{Frontend Móvil (app ciudadana)}
+\begin{itemize}
+    \item \textbf{.NET MAUI} → Una sola base de código para Android e iOS, ¡punto!
+    \item \textbf{MVVM + CommunityToolkit.MVVM} → Menos código repetitivo, más felicidad.
+    \item \textbf{HttpClient + SecureStorage} → Consumo seguro del API y tokens bien guardados.
+    \item \textbf{Notificaciones locales} → Recordatorios para que el ciudadano no se olvide de su cita.
+\end{itemize}
+
+\subsubsection{Base de datos}
+\begin{itemize}
+    \item \textbf{Oracle Database} → La que ya usa Electrohuila (no íbamos a pelear con eso).
+    \item \textbf{Normalización 3NF + índices bien puestos} → Consultas rápidas aunque haya miles de citas.
+    \item \textbf{Stored procedures} → Para las validaciones pesadas de disponibilidad (menos viajes al servidor).
+\end{itemize}
+
+\subsubsection{Herramientas de diseño}
+\begin{itemize}
+    \item \textbf{Draw.io} → Diagramas ER, arquitectura, flujos… todo clarito.
+    \item \textbf{Figma} → Mockups que hasta los jefes de Electrohuila entendieron a la primera.
+\end{itemize}
+
+\subsection{Detalles técnicos que vale la pena contar}
+
+Aquí va lo más jugoso de cómo lo hicimos de verdad:
+
+\textbf{El backend con Clean Architecture:}  
+El proyecto quedó dividido en cuatro capas claritas y nadie se queja cuando toca modificar algo:
+- Dominio → solo POCOs y reglas de negocio puras.
+- Aplicación → interfaces, DTOs y los casos de uso.
+- Infraestructura → Entity Framework, repositorios y servicios externos.
+- API → controllers, middleware y Swagger para que cualquiera entienda la API.
+
+\textbf{Los controllers:}  
+Rutas bien versionadas (`api/v1/citas`), respuestas HTTP correctas, validación con FluentValidation, y un middleware que atrapa cualquier error y devuelve algo bonito y útil al frontend (nada de stack traces en producción).
+
+\textbf{Entity Framework con Oracle:}  
+Al principio costó (Oracle no es tan amistoso como SQL Server), pero con Fluent API configuramos todo: claves, índices, relaciones muchos-a-muchos, migraciones… y cero N+1 gracias a un buen uso de `.Include()` y proyecciones.
+
+\textbf{Seguridad:}  
+JWT firmado, claims con roles y permisos, políticas personalizadas (`[Authorize(Policy = "PuedeGestionarCitas")]`), refresh tokens y todo el hashing de contraseñas con bcrypt. Pasó las pruebas de seguridad básicas sin un solo hallazgo grave.
+
+\textbf{El portal web con Next.js:}  
+Aprovechamos al máximo Server Components para que las páginas carguen rapidísimo. Los componentes interactivos son Client Components con hooks normales. Todo en TypeScript, Zustand para el estado global (usuario logueado, sucursal seleccionada, etc.) y shadcn/ui para que quede profesional sin inventar la rueda.
+
+\textbf{SignalR en acción:}  
+Creamos un `NotificationsHub`. Cuando alguien agenda o cancela una cita, el hub avisa al administrador en tiempo real. En el frontend web se conecta con `@microsoft/signalr`, reconexión automática y todo. ¡Ver la tabla actualizarse sola es una pasada!
+
+\textbf{La app móvil con MAUI + MVVM:}  
+CommunityToolkit.MVVM nos ahorró escribir 200 líneas de INotifyPropertyChanged por pantalla. Cada pantalla tiene su ViewModel con `[ObservableProperty]`, `[RelayCommand]` y navegación limpia. El binding en XAML funciona perfecto y el código quedó súper limpio.
+
+\textbf{Consumo del API desde el móvil:}  
+Un solo servicio (`ApiService`) que pone el token en cada petición, maneja errores de red, timeout, respuestas 401… todo centralizado. El token se guarda en SecureStorage y listo.
+
+\textbf{Optimización con Oracle:}  
+Usamos SQL Developer para ver los planes de ejecución, donde veíamos full table scans, también movimos la lógica pesada de disponibilidad a stored procedures una sola llamada y Oracle hace toda la magia internamente.
+
+\textbf{Patrones que realmente usamos:}  
+Repository + Unit of Work, Factory para crear objetos complejos, Strategy para reglas que cambian según sucursal o tipo de PQR, y la Dependency Injection en todos lados, el resultado es el código se vuelve testable, mantenible y no da miedo tocarlo.
+
+El sistema que solo cumple con todo lo que pidió Electrohuila, sino que está construido para durar, escalar y seguir creciendo sin que se convierta en un monstruo inmanejable.

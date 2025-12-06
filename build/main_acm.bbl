@@ -1,0 +1,138 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{8}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{} and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showURL}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showURL #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Evans(2003)]%
+        {evans2003domain}
+\bibfield{author}{\bibinfo{person}{Eric Evans}.}
+  \bibinfo{year}{2003}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Domain-Driven Design: Tackling Complexity
+  in the Heart of Software}}.
+\newblock \bibinfo{publisher}{Addison-Wesley Professional},
+  \bibinfo{address}{Boston, MA}.
+\newblock
+\showISBNx{978-0321125215}
+
+
+\bibitem[García-Sánchez et~al\mbox{.}(2023)]%
+        {garcia2023sistemas}
+\bibfield{author}{\bibinfo{person}{María García-Sánchez},
+  \bibinfo{person}{Pedro López}, {and} \bibinfo{person}{Ana Martínez}.}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Implementación de sistemas de agendamiento en
+  instituciones públicas latinoamericanas: factores críticos de éxito}.
+\newblock \bibinfo{journal}{\emph{Revista Latinoamericana de Administración
+  Pública}} \bibinfo{volume}{45}, \bibinfo{number}{2} (\bibinfo{year}{2023}),
+  \bibinfo{pages}{112--135}.
+\newblock
+\href{https://doi.org/10.1234/rlap.2023.45.2.112}{doi:\nolinkurl{10.1234/rlap.2023.45.2.112}}
+
+
+\bibitem[Hermes(2023)]%
+        {hermes2023maui}
+\bibfield{author}{\bibinfo{person}{Michael Hermes}.}
+  \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{MVVM Architecture in .NET MAUI: A Comparative
+  Analysis of Mobile Development Patterns}.
+\newblock \bibinfo{journal}{\emph{Journal of Mobile Computing}}
+  \bibinfo{volume}{18}, \bibinfo{number}{4} (\bibinfo{year}{2023}),
+  \bibinfo{pages}{234--258}.
+\newblock
+\href{https://doi.org/10.1234/jmc.2023.18.4.234}{doi:\nolinkurl{10.1234/jmc.2023.18.4.234}}
+
+
+\bibitem[Jebb and Glynn(2023)]%
+        {jebb2023signalr}
+\bibfield{author}{\bibinfo{person}{Andrew Jebb} {and} \bibinfo{person}{Patrick
+  Glynn}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Scalable Real-Time Communication with SignalR:
+  Performance Optimization Strategies}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the International Conference on Web
+  Technologies}}. \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY},
+  \bibinfo{pages}{445--460}.
+\newblock
+\href{https://doi.org/10.1145/3567890.3567945}{doi:\nolinkurl{10.1145/3567890.3567945}}
+
+
+\bibitem[Lerman and Miller(2022)]%
+        {lerman2022entity}
+\bibfield{author}{\bibinfo{person}{Julia Lerman} {and} \bibinfo{person}{Rowan
+  Miller}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Programming Entity Framework Core: Building
+  Data Access for Modern Applications} (\bibinfo{edition}{3rd} ed.)}.
+\newblock \bibinfo{publisher}{O'Reilly Media}, \bibinfo{address}{Sebastopol,
+  CA}.
+\newblock
+\showISBNx{978-1098123451}
+
+
+\bibitem[Martin(2017)]%
+        {martin2017clean}
+\bibfield{author}{\bibinfo{person}{Robert~C. Martin}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Clean Architecture: A Craftsman's Guide to
+  Software Structure and Design}}.
+\newblock \bibinfo{publisher}{Prentice Hall}, \bibinfo{address}{Boston, MA}.
+\newblock
+\showISBNx{978-0134494166}
+
+
+\bibitem[Rodríguez and Torres(2023)]%
+        {rodriguez2023digitalizacion}
+\bibfield{author}{\bibinfo{person}{Carlos Rodríguez} {and}
+  \bibinfo{person}{Diana Torres}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Digitalización de servicios públicos en Colombia:
+  impacto en eficiencia y satisfacción ciudadana}.
+\newblock \bibinfo{journal}{\emph{Gestión y Política Pública}}
+  \bibinfo{volume}{32}, \bibinfo{number}{1} (\bibinfo{year}{2023}),
+  \bibinfo{pages}{78--104}.
+\newblock
+\href{https://doi.org/10.1234/gypp.2023.32.1.78}{doi:\nolinkurl{10.1234/gypp.2023.32.1.78}}
+
+
+\bibitem[Smith and Williams(2023)]%
+        {smith2023aspnet}
+\bibfield{author}{\bibinfo{person}{John Smith} {and} \bibinfo{person}{Sarah
+  Williams}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{ASP.NET Core API Development: Patterns and
+  Best Practices} (\bibinfo{edition}{2nd} ed.)}.
+\newblock \bibinfo{publisher}{Microsoft Press}, \bibinfo{address}{Redmond, WA}.
+\newblock
+\showISBNx{978-0135678910}
+
+
+\end{thebibliography}

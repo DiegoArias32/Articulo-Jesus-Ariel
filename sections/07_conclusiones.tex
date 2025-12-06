@@ -1,0 +1,66 @@
+\section{Conclusiones y trabajo futuro}
+Este proyecto demostró la viabilidad de desarrollar un sistema de información empresarial completo y funcional aplicando principios modernos de ingeniería de software en un contexto de formación práctica del SENA. El Sistema de Agendamiento de Citas PQR implementado para Electrohuila cumple con todos los requerimientos funcionales y no funcionales establecidos, proporcionando una solución robusta, escalable y mantenible.
+
+\subsection{Contribuciones principales}
+Este trabajo contribuye al campo de los sistemas de información de las siguientes maneras:
+
+\begin{enumerate}
+    \item \textbf{Documentación de arquitectura full-stack moderna:} Se documentó detalladamente la implementación de una arquitectura completa que integra .NET Core 8, Next.js 14, .NET MAUI y Oracle Database. Esta combinación de tecnologías, aunque individualmente documentadas, rara vez se presenta integrada en un sistema cohesivo completo. La experiencia documentada puede servir como referencia para proyectos similares.
+
+    \item \textbf{Aplicación de Clean Architecture en contexto empresarial real:} Se demostró la aplicación práctica de Clean Architecture en un proyecto con requerimientos empresariales reales, no simplemente como ejercicio académico. Se documentaron los beneficios concretos (mantenibilidad, testabilidad, independencia de frameworks) y los desafíos (curva de aprendizaje, complejidad inicial) de esta arquitectura.
+
+    \item \textbf{Implementación de comunicación en tiempo real con SignalR:} Se documentó la implementación completa de notificaciones en tiempo real utilizando SignalR, incluyendo manejo de reconexiones, grupos de usuarios, y escalamiento horizontal. Esta experiencia práctica complementa la documentación técnica existente con consideraciones de implementación real.
+
+    \item \textbf{Estudio de caso de desarrollo en contexto educativo:} Se demostró que es posible desarrollar software de calidad empresarial en el contexto de formación del SENA, aplicando rigurosamente principios de ingeniería de software. Esta experiencia puede servir como modelo para otras instituciones educativas.
+\end{enumerate}
+
+\subsection{Cumplimiento de objetivos}
+El sistema desarrollado cumple completamente con los objetivos establecidos:
+
+\begin{itemize}
+    \item \textbf{Modernización del proceso de agendamiento:} El sistema reemplaza procesos manuales o sistemas legacy con una solución moderna, accesible desde dispositivos móviles y web.
+
+    \item \textbf{Mejora de la experiencia ciudadana:} La aplicación móvil intuitiva permite a ciudadanos agendar citas en cualquier momento sin necesidad de llamadas telefónicas o visitas presenciales.
+
+    \item \textbf{Eficiencia operacional:} El portal administrativo centraliza la gestión de empleados, sucursales y configuraciones, reduciendo carga administrativa y mejorando la asignación de recursos.
+
+    \item \textbf{Notificaciones en tiempo real:} El sistema de notificaciones mantiene informados a usuarios y administradores sobre cambios de estado, reduciendo ausencias y mejorando la comunicación.
+
+    \item \textbf{Escalabilidad y mantenibilidad:} La arquitectura implementada permite escalar el sistema según demanda futura y facilita la incorporación de nuevas funcionalidades con mínimo impacto en código existente.
+\end{itemize}
+
+\subsection{Limitaciones}
+Se identifican las siguientes limitaciones del proyecto actual:
+
+\begin{itemize}
+    \item \textbf{Integración limitada con sistemas existentes:} El sistema funciona de manera independiente y no se integra completamente con otros sistemas de Electrohuila (facturación, CRM). La integración futura requerirá desarrollo de interfaces y APIs adicionales.
+
+    \item \textbf{Funcionalidades de reportería básicas:} Los reportes implementados cubren necesidades básicas pero podrían expandirse con análisis más sofisticados, dashboards interactivos, y exportación en múltiples formatos.
+
+    \item \textbf{Testing limitado en dispositivos:} Las pruebas de la aplicación móvil se realizaron principalmente en emuladores y un conjunto limitado de dispositivos físicos. Testing más exhaustivo en diversas versiones de Android e iOS sería recomendable antes de despliegue masivo.
+
+    \item \textbf{Métricas de uso no implementadas:} No se implementó un sistema completo de analytics para medir comportamiento de usuarios, patrones de uso, y métricas de rendimiento en producción.
+\end{itemize}
+
+\subsection{Trabajo futuro}
+El trabajo futuro propuesto incluye las siguientes líneas:
+
+\begin{itemize}
+    \item \textbf{Integración con sistemas legacy:} Desarrollar conectores e interfaces para integrar el sistema de agendamiento con sistemas existentes de Electrohuila, permitiendo intercambio bidireccional de información (datos de clientes, historial de PQR, información de facturación).
+
+    \item \textbf{Módulo de analytics avanzados:} Implementar un sistema de analytics que capture métricas de uso, genere reportes predictivos sobre demanda de citas, identifique patrones de comportamiento, y proporcione dashboards ejecutivos con KPIs del sistema.
+
+    \item \textbf{Funcionalidades adicionales para ciudadanos:} Expandir la aplicación móvil con funcionalidades como reprogramación de citas, valoración del servicio recibido, chat en vivo con soporte, y notificaciones push nativas (actualmente solo en tiempo real cuando la app está abierta).
+
+    \item \textbf{Mejoras de accesibilidad:} Implementar características de accesibilidad completas siguiendo estándares WCAG (Web Content Accessibility Guidelines), incluyendo soporte para lectores de pantalla, navegación por teclado, y opciones de alto contraste.
+
+    \item \textbf{Sistema de colas virtuales:} Extender el sistema para soportar colas virtuales que permitan a ciudadanos recibir notificaciones cuando se acerque su turno, reduciendo tiempos de espera física en sucursales.
+
+    \item \textbf{Optimización de rendimiento:} Implementar caching distribuido con Redis para reducir carga en la base de datos, optimización adicional de consultas, y mejoras en tiempo de carga inicial de la aplicación móvil.
+
+    \item \textbf{Despliegue en producción:} Completar el proceso de despliegue a producción incluyendo configuración de infraestructura cloud (Azure o AWS), implementación de CI/CD con pipelines automatizados, y configuración de monitoreo y alertas.
+
+    \item \textbf{Evaluación de impacto:} Realizar un estudio cuantitativo del impacto del sistema en métricas operacionales de Electrohuila (reducción de tiempos de espera, mejora en satisfacción ciudadana, eficiencia en asignación de recursos) después de varios meses en producción.
+\end{itemize}
+
+Este proyecto demuestra que la aplicación rigurosa de principios de ingeniería de software moderna en contextos de formación práctica puede resultar en sistemas de calidad empresarial que generan valor real para organizaciones. La experiencia y lecciones aprendidas documentadas en este artículo pueden servir como guía para proyectos similares en instituciones educativas y empresas del sector público.

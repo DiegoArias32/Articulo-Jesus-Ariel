@@ -1,0 +1,20 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[0] Config.pm:331> INFO - Logfile is 'build/main_apa7.blg'
+[100] biber:342> INFO - === Sun Nov 30, 2025, 18:22:41
+[126] Biber.pm:421> INFO - Reading 'build/main_apa7.bcf'
+[201] Biber.pm:1002> INFO - Found 8 citekeys in bib section 0
+[220] Biber.pm:4487> INFO - Processing section 0
+[229] Biber.pm:4678> INFO - Looking for bibtex file 'bibliography/references.bib' for section 0
+[237] bibtex.pm:1713> INFO - LaTeX decoding ...
+[267] bibtex.pm:1519> INFO - Found BibTeX data source 'bibliography/references.bib'
+[346] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[346] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[346] Biber.pm:4307> INFO - Sorting list 'apa/apasortcite//global/global/global' of type 'entry' with template 'apa' and locale 'es-ES'
+[367] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[368] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[368] Biber.pm:4307> INFO - Sorting list 'apa/global//global/global/global' of type 'entry' with template 'apa' and locale 'es-ES'
+[376] bbl.pm:676> INFO - Writing 'build/main_apa7.bbl' with encoding 'UTF-8'
+[389] bbl.pm:779> INFO - Output to build/main_apa7.bbl
+[390] Biber.pm:132> WARN - ISBN '978-0321125215' in entry 'evans2003domain' is invalid - run biber with '--validate_datamodel' for details.
+[390] Biber.pm:132> WARN - ISBN '978-0135678910' in entry 'smith2023aspnet' is invalid - run biber with '--validate_datamodel' for details.
+[390] Biber.pm:134> INFO - WARNINGS: 2

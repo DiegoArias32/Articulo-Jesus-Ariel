@@ -1,0 +1,138 @@
+===============================================================================
+INSTRUCCIONES PARA COMPILAR EL ARTÍCULO ACTUALIZADO
+===============================================================================
+
+El artículo ha sido completamente actualizado del proyecto "Autogestión SENA"
+al proyecto "Sistema de Agendamiento de Citas PQR para Electrohuila".
+
+===============================================================================
+ARCHIVOS PRINCIPALES
+===============================================================================
+
+Archivo principal: main_ieee.tex
+Formato: IEEE Conference Paper
+
+Secciones actualizadas:
+- sections/00_abstract.tex (Abstract - 182 palabras)
+- sections/01_introduccion.tex (Introducción)
+- sections/03_metodologia.tex (Metodología)
+- sections/04_implementacion.tex (Implementación)
+- sections/05_resultados.tex (Resultados)
+- sections/A1_apendices.tex (Apéndices)
+
+Secciones NO modificadas (genéricas):
+- sections/02_relacionados.tex (Trabajos relacionados)
+- sections/06_discusion.tex (Discusión)
+- sections/07_conclusiones.tex (Conclusiones)
+
+===============================================================================
+OPCIONES DE COMPILACIÓN
+===============================================================================
+
+Opción 1: Usando Docker (Recomendado)
+--------------------------------------
+docker-compose up
+
+Opción 2: Usando el script de Windows
+--------------------------------------
+compile.bat
+
+Opción 3: Compilación manual con LaTeX
+---------------------------------------
+pdflatex main_ieee.tex
+biber main_ieee
+pdflatex main_ieee.tex
+pdflatex main_ieee.tex
+
+===============================================================================
+VERIFICACIÓN DEL CONTENIDO
+===============================================================================
+
+Antes de compilar, verifica que se hayan actualizado correctamente:
+
+1. Título del documento (main_ieee.tex):
+   "Sistema de Agendamiento de Citas PQR para Electrohuila: Desarrollo 
+    Full-Stack Asistido por Inteligencia Artificial"
+
+2. Keywords (main_ieee.tex):
+   Sistemas de agendamiento, Gestión de PQR, .NET Core, Next.js, 
+   Oracle Database, SignalR, Desarrollo asistido por IA, MAUI
+
+3. Abstract (sections/00_abstract.tex):
+   - Debe mencionar Electrohuila
+   - Debe mencionar .NET Core 8, Next.js 14, MAUI, Oracle Database
+   - Debe tener aproximadamente 180-200 palabras
+
+4. Introducción (sections/01_introduccion.tex):
+   - Primera oración debe mencionar "Sistema de Agendamiento de Citas PQR"
+   - Debe describir Electrohuila como empresa de servicios públicos
+
+===============================================================================
+ARCHIVOS GENERADOS DESPUÉS DE COMPILAR
+===============================================================================
+
+Después de compilar exitosamente, se generará:
+- main_ieee.pdf (Artículo final en formato IEEE)
+
+Archivos auxiliares que se generarán:
+- main_ieee.aux
+- main_ieee.bbl
+- main_ieee.bcf
+- main_ieee.blg
+- main_ieee.log
+- main_ieee.run.xml
+
+===============================================================================
+TROUBLESHOOTING
+===============================================================================
+
+Si hay errores de compilación:
+
+1. Verifica que las imágenes existan en graphics/:
+   - graphics/inicio_proyecto.png
+   - graphics/ciclo_desarrollo.png
+
+2. Verifica que existan los archivos de bibliografía en bibliography/
+
+3. Verifica que existan los archivos de configuración en includes/:
+   - includes/preamble_common.tex
+   - includes/preamble_ieee.tex
+
+===============================================================================
+REVISIÓN FINAL
+===============================================================================
+
+Después de compilar, revisa en el PDF:
+
+✓ Título correcto en la primera página
+✓ Keywords correctas debajo del abstract
+✓ Abstract menciona Electrohuila y el stack tecnológico
+✓ Introducción contextualiza el proyecto correctamente
+✓ Metodología describe las 3 fases con tecnologías específicas
+✓ Implementación detalla el stack .NET/Next.js/MAUI/Oracle
+✓ Resultados incluyen ejemplos específicos de la IA
+✓ Apéndices mencionan las herramientas de IA utilizadas
+✓ Figuras se muestran correctamente
+✓ Referencias bibliográficas están completas
+
+===============================================================================
+ARCHIVOS DE DOCUMENTACIÓN GENERADOS
+===============================================================================
+
+Se han creado dos archivos adicionales para referencia:
+
+1. CAMBIOS_REALIZADOS.md
+   - Detalle de todos los cambios realizados en cada sección
+
+2. RESUMEN_ACTUALIZACION.txt
+   - Resumen ejecutivo de la actualización completa
+
+===============================================================================
+CONTACTO
+===============================================================================
+
+Autor: Brayan Stid Cortés Lombana
+Institución: SENA, Colombia
+Email: bscortes40@soy.sena.edu.co
+
+===============================================================================

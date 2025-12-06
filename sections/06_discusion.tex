@@ -1,0 +1,51 @@
+\section{Discusión}
+La experiencia de desarrollo del Sistema de Agendamiento de Citas PQR para Electrohuila proporciona valiosas lecciones sobre la aplicación de principios de ingeniería de software moderna en proyectos empresariales reales.
+
+\subsection{Decisiones arquitectónicas}
+La elección de Clean Architecture como patrón arquitectónico principal demostró ser acertada para este proyecto. La separación en capas independientes facilitó el desarrollo paralelo de diferentes componentes del sistema. El equipo backend pudo trabajar en la lógica de negocio sin esperar definiciones completas de la interfaz, mientras que el equipo frontend pudo crear mockups funcionales consumiendo contratos de API definidos mediante DTOs. Esta independencia aceleró el desarrollo y facilitó la realización de pruebas unitarias.
+
+Sin embargo, Clean Architecture introduce una curva de aprendizaje inicial significativa. La comprensión de conceptos como inversión de dependencias, interfaces de repositorio, y separación entre entidades de dominio y DTOs requirió tiempo de estudio y práctica. Para proyectos más pequeños o con equipos menos experimentados, arquitecturas más simples podrían ser más apropiadas. En el contexto educativo del SENA, esta complejidad adicional se justificó por el valor de aprendizaje y la preparación para proyectos empresariales reales.
+
+La decisión de utilizar Oracle Database en lugar de alternativas como PostgreSQL o SQL Server se basó en requerimientos específicos de Electrohuila, que ya utiliza Oracle en otros sistemas. Si bien Entity Framework Core proporciona abstracción sobre la base de datos, se encontraron algunas peculiaridades del provider de Oracle que requirieron atención especial, como el mapeo de tipos de datos específicos (NUMBER, VARCHAR2, DATE) y la configuración de secuencias para generación de IDs.
+
+\subsection{Ventajas del stack tecnológico seleccionado}
+El stack basado en .NET para backend y móvil, combinado con Next.js para web, ofreció ventajas significativas:
+
+\textbf{Reutilización de código:} El uso de C\# tanto en el backend (.NET Core) como en la aplicación móvil (.NET MAUI) permitió compartir modelos, validaciones y lógica de cliente. Esto redujo duplicación de código y garantizó consistencia en el comportamiento entre plataformas.
+
+\textbf{Type safety end-to-end:} TypeScript en el frontend web y C\# en backend/móvil proporcionaron seguridad de tipos en toda la aplicación. Los errores de tipos se detectan en tiempo de compilación en lugar de tiempo de ejecución, reduciendo significativamente bugs en producción.
+
+\textbf{Ecosistema maduro:} Tanto .NET como React/Next.js cuentan con ecosistemas maduros con abundante documentación, bibliotecas de terceros bien mantenidas, y comunidades activas. Esto facilitó encontrar soluciones a problemas comunes y mejores prácticas establecidas.
+
+\textbf{Performance:} .NET Core 8 ofrece rendimiento excelente para APIs REST, con latencias bajas y capacidad de manejar miles de peticiones concurrentes. Next.js con Server Components optimiza el tiempo de carga inicial de páginas web mediante renderizado en servidor.
+
+Sin embargo, también se identificaron algunos desafíos: la compatibilidad entre versiones de paquetes NuGet a veces causó conflictos que requirieron resolución manual. El ecosistema de MAUI, siendo relativamente nuevo, tiene menos componentes de terceros comparado con alternativas más maduras como React Native o Flutter.
+
+\subsection{Desafíos técnicos enfrentados}
+Durante el desarrollo se enfrentaron varios desafíos técnicos significativos:
+
+\textbf{Configuración de SignalR:} La implementación de comunicación en tiempo real con SignalR presentó complejidad en escenarios de reconexión automática. Fue necesario implementar lógica de reintento con backoff exponencial y mecanismos para reestablecer suscripciones a grupos después de reconexiones. El manejo de múltiples instancias del backend requirió configuración de backplane con Redis para sincronizar notificaciones.
+
+\textbf{Server Components vs Client Components en Next.js:} La diferenciación entre Server Components y Client Components en Next.js 14 fue inicialmente confusa. Errores de hidratación ocurrieron cuando se intentó usar hooks de React en Server Components. La solución requirió diseño cuidadoso de la arquitectura de componentes, separando claramente componentes que necesitan interactividad (Client) de componentes puramente de presentación (Server).
+
+\textbf{Binding de datos en MAUI:} El data binding en MAUI con MVVM a veces presentó comportamientos inesperados. Problemas comunes incluyeron propiedades que no se actualizaban en la interfaz por falta de notificación de cambios, y commands que no se ejecutaban por incorrecta configuración de BindingContext. El uso de CommunityToolkit.MVVM con source generators simplificó esto, pero requirió comprensión de cómo funcionan los generadores de código.
+
+\textbf{Optimización de consultas Oracle:} Inicialmente, algunas consultas con múltiples JOINs presentaban rendimiento deficiente. El análisis de planes de ejecución reveló falta de índices apropiados y consultas mal estructuradas. La optimización mediante índices selectivos, refactorización de queries, y uso de stored procedures para lógica compleja mejoró dramáticamente el rendimiento.
+
+\subsection{Lecciones aprendidas}
+Este proyecto generó importantes lecciones para el desarrollo de software empresarial:
+
+\textbf{Importancia del diseño inicial:} El tiempo invertido en diseño de base de datos, definición de arquitectura y creación de mockups se justificó completamente. Tener un diseño claro antes de codificar redujo significativamente la cantidad de refactorización necesaria posteriormente.
+
+\textbf{Pruebas desde el inicio:} Implementar pruebas unitarias desde el principio, en lugar de dejarlas para el final, facilitó la detección temprana de bugs y mejoró la confianza al realizar cambios. La inversión en infraestructura de testing se amortizó rápidamente.
+
+\textbf{Documentación continua:} Documentar decisiones arquitectónicas y código complejo de manera continua fue más efectivo que intentar documentar todo al final. Los comentarios de código ayudaron durante el desarrollo, no solo después.
+
+\textbf{Iteración con usuarios:} Las sesiones tempranas de validación con usuarios reales (administradores y ciudadanos de Electrohuila) identificaron problemas de usabilidad que no eran evidentes para el equipo de desarrollo. Incorporar feedback de usuarios mejoró significativamente la calidad del producto final.
+
+\textbf{Manejo de dependencias:} Mantener las dependencias actualizadas de manera proactiva previno problemas de seguridad y compatibilidad. Sin embargo, actualizaciones automáticas sin pruebas causaron problemas ocasionales, por lo que se adoptó una política de actualizaciones controladas con pruebas antes de producción.
+
+\subsection{Aplicabilidad en contextos similares}
+Las decisiones técnicas y la arquitectura implementada en este proyecto son aplicables a otros contextos de sistemas de agendamiento o gestión de citas en el sector público. Los patrones implementados (Clean Architecture, MVVM, comunicación en tiempo real) son transferibles a proyectos similares.
+
+Para instituciones educativas como el SENA, este proyecto demuestra que es posible desarrollar aplicaciones empresariales de calidad en contextos de formación, siempre que se apliquen rigurosamente principios de ingeniería de software y se cuente con requerimientos claros del negocio.

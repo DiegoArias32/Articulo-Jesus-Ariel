@@ -1,0 +1,21 @@
+\section{Introducción}
+Este proyecto nació de una necesidad real de Electrohuila, la empresa que lleva la luz a todo el Huila, quería dejar de atender las Peticiones, Quejas y Reclamos (PQR) con papelitos y filas interminables, y la idea era simple que cualquier persona pudiera sacar una cita desde su celular o computador, llegar a la sucursal en el horario exacto y ser atendido sin perder medio día esperando.
+Para lograrlo, construimos un sistema completo de punta a punta con tres piezas principales:
+\begin{itemize}
+    \item Una aplicación móvil para que los ciudadanos agenden su cita solos, en segundos, desde cualquier lugar.
+    \item Un portal web moderno para que los empleados y administradores manejen todo ya sea sucursales, horarios, personal, festivos y permisos.
+    \item Un backend robusto que une ambas partes, cuida los datos y hace que todo funcione en tiempo real.
+\end{itemize}
+Desde el principio decidimos hacerlo bien hecho ya que usamos Clean Architecture en el backend para que el código sea limpio, fácil de probar y que no se vuelva un desastre cuando crezca. En la app móvil aplicamos el patrón MVVM (porque con .NET MAUI es lo más cómodo y ordenado), y en el portal web seguimos las mejores prácticas de React con Next.js 14, TypeScript y un manejo de estado sencillo con Zustand.
+El stack que elegimos fue bastante actual y pensado para durar:
+\begin{itemize}
+    \item Backend: .NET 9 + Entity Framework Core
+    \item Base de datos: Oracle (porque es lo que ya usa toda la empresa)
+    \item Portal administrativo: Next.js 14 + TypeScript
+    \item App móvil: .NET MAUI (una sola base de código para Android y iOS)
+    \item Notificaciones en tiempo real: SignalR
+\end{itemize}
+Con esto logramos un sistema que hace de todo: valida horarios disponibles al instante, maneja estados de citas (agendada, confirmada, atendida, cancelada), controla quién ve y hace qué con roles y permisos bien granulares, respeta festivos nacionales y locales, y avisa al momento si algo cambia gracias a las notificaciones push.
+Todo el proyecto se desarrollo como parte de mi formación práctica en el SENA, pero con la seriedad y los requerimientos de una solución empresarial real, fue una gran oportunidad de poner en práctica todo lo aprendido: desde levantar requerimientos con el cliente hasta entregar un producto pulido, probado y listo para producción.
+Este documento no solo cuenta qué hicimos, sino también por qué tomamos cada decisión, qué problemas aparecieron en el camino y qué aprendimos. Espero que le sirva a otros estudiantes, instructores o desarrolladores que quieran montar sistemas similares.
+El resto del artículo está organizado así: en la Sección II revisamos otros sistemas de agendamiento y arquitecturas modernas; la Sección III explica cómo fue el proceso en tres fases grandes; la Sección IV entra en el detalle técnico de la implementación; la Sección V muestra lo que finalmente entregamos y cómo funciona; la Sección VI reflexiona sobre los retos y lecciones aprendidas; y la Sección VII cierra con las conclusiones y lo que se podría hacer después.

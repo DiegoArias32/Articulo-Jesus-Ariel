@@ -1,0 +1,41 @@
+\section{Marco teórico y trabajos relacionados}
+
+En las últimas décadas, los sistemas de agendamiento de citas han pasado de ser simples agendas de papel a soluciones digitales bastante sofisticadas que combinan varios canales de comunicación y tecnologías actuales.
+
+\subsection{Sistemas de agendamiento en el sector público}
+
+García-Sánchez et al. \cite{garcia2023sistemas} estudiaron cómo se han implementado estos sistemas en instituciones públicas de América Latina y llegaron a la conclusión de que, cuando se usan tecnologías modernas, la eficiencia operativa sube muchísimo y los ciudadanos quedan mucho más satisfechos. Según ellos, lo que realmente marca la diferencia es tener una interfaz sencilla para el usuario final, que el sistema se integre bien con los antiguos programas que ya existen y que pueda crecer sin problemas cuando aumenta la demanda.
+
+Por su parte, Rodríguez y Torres \cite{rodriguez2023digitalizacion} cuentan varias experiencias de digitalización de servicios públicos en Colombia y muestran que un buen sistema de citas puede reducir hasta un 40\,\% los tiempos de espera y optimiza mucho mejor el personal disponible. Estos resultados son justo la razón por la que Electrohuila necesita un proyecto como este.
+
+\subsection{Arquitecturas de software modernas}
+
+Robert C. Martin \cite{martin2017clean}, con su famoso Clean Architecture, dejó claro que lo ideal es separar bien las responsabilidades en capas concéntricas y que las reglas de negocio no dependan de frameworks ni de detalles técnicos. Gracias a eso, el código es más fácil de probar, mantener y evolucionar con el tiempo. En aplicaciones empresariales grandes, esta arquitectura ha demostrado que ahorra mucho dinero en mantenimiento a largo plazo.
+
+Eric Evans \cite{evans2003domain} trajo Domain-Driven Design (DDD), un enfoque que pone el dominio del negocio en el centro de todo. Para un sistema de agendamiento de citas —con tantas reglas como disponibilidad, cancelaciones, conflictos de horarios, etc.— modelar bien el dominio es clave, y DDD da las herramientas perfectas para hacerlo.
+
+\subsection{Desarrollo full-stack con .NET}
+
+Smith y Williams \cite{smith2023aspnet} explican paso a paso cómo construir APIs REST robustas con ASP.NET Core: autenticación con middleware, manejo centralizado de errores, versionamiento… todo lo que uno necesita para que el backend sea sólido y profesional.
+
+Lerman y Miller \cite{lerman2022entity} se meten de lleno en Entity Framework Core con Oracle, algo que no es tan común encontrar documentado. Hablan del mapeo de tipos de datos, cómo optimizar consultas complejas y manejar transacciones sin morir en el intento. Para el backend de Electrohuila esto es oro puro.
+
+\subsection{Aplicaciones móviles multiplataforma}
+
+Hermes \cite{hermes2023maui} hace un análisis muy completo del patrón MVVM aplicado a .NET MAUI y muestra por qué separar la lógica de presentación de la lógica de negocio hace la vida más fácil: el código queda más limpio, más testeable y más mantenible. Incluso compara el rendimiento con otros enfoques móviles.
+
+\subsection{Comunicación en tiempo real}
+
+Jebb y Glynn \cite{jebb2023signalr} exploran todo lo que se puede hacer con SignalR para tener comunicación bidireccional en tiempo real: reconexiones automáticas, escalamiento horizontal con backplanes y trucos de rendimiento. Demuestran que, bien configurado, SignalR soporta tranquilamente 100\,000 conexiones concurrentes, algo que nos da mucha tranquilidad para picos de uso.
+
+\subsection{Vacíos que todavía existen}
+
+Aunque hay mucha literatura sobre arquitecturas, patrones y sistemas de agendamiento, todavía faltan cosas importantes:
+
+\begin{itemize}
+    \item Casos completos y bien documentados que junten .NET Core, Next.js, .NET MAUI y Oracle Database en un solo sistema funcional.
+    \item Estudios de caso reales sobre sistemas de agendamiento pensados específicamente para gestionar PQR en empresas de servicios públicos.
+    \item Análisis profundos de decisiones arquitectónicas en proyectos hechos desde contextos educativos como el SENA, pero con requerimientos reales de empresa.
+\end{itemize}
+
+Este proyecto busca llenar precisamente esos huecos: vamos a documentar todo el proceso, las decisiones técnicas que tomamos, los errores que cometimos y lo que aprendimos en el camino. Esperamos que sirva de referencia para otros equipos que enfrenten retos parecidos.

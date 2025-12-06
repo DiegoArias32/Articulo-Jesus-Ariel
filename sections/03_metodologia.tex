@@ -1,0 +1,62 @@
+\section{Metodología de desarrollo}
+
+El sistema de agendamiento de citas PQR para Electrohuila se desarrolló siguiendo una metodología clara y bien estructurada, dividida en tres grandes fases que nos permitieron entregar algo sólido, escalable y fácil de mantener.
+
+\subsection{Fase 1: Análisis y Diseño del Sistema}
+Aquí pusimos los cimientos de todo el proyecto, nos sentamos con la gente de Electrohuila, escuchamos sus dolores de cabeza actuales y definimos exactamente qué necesitaba el sistema.
+
+\begin{itemize}
+    \item \textbf{Levantamiento de requerimientos:} Hicimos varias reuniones con los stakeholders (gerentes, coordinadores de atención al cliente, administrativos). Ahí salió todo: cómo funciona hoy el agendamiento manual, qué frustraciones tienen los ciudadanos, qué reportes necesitan los jefes, etc. De ahí salieron los casos de uso principales tanto para ciudadanos (agendar, consultar y cancelar citas) como para administradores (gestionar empleados, horarios, sucursales y permisos).
+
+    \item \textbf{Diseño de la base de datos:} Dibujamos el modelo entidad-relación en Draw.io y lo normalizamos hasta 3NF para no tener datos repetidos ni problemas raros, tambien definimos las entidades clave (Usuario, Empleado, Cita, Sucursal, Rol, Permiso, DíaFestivo), sus relaciones, tambien los índices en las columnas que más se consultan y algunos triggers para auditoría automática.
+
+    \item \textbf{Mockups y diseño de interfaces:} En el figma creamos prototipos de alta fidelidad tanto del portal web del lado del cliente como el del administrativo como de la app móvil, pensamos mucho en los dos tipos de usuario, el administrativo que pasa todo el día en el sistema (necesita rapidez) y el ciudadano que tal vez entra una vez al año (necesita que sea súper obvio).
+
+    \item \textbf{Arquitectura general:} Tambien decidimos usar Clean Architecture en el backend para que las reglas de negocio no dependan ni de Oracle, ni de .NET, ni de nada externo, quedó con cuatro capas claritas la de Dominio → Aplicación → Infraestructura → API, en el móvil usamos MVVM puro, y en el portal web una arquitectura de componentes con Zustand para manejar el estado global.
+
+    \item \textbf{Elección del stack tecnológico:} Hicimos una matriz comparativa seria (madurez, soporte empresarial, documentación, compatibilidad con Oracle, etc.) y ganó claramente: .NET 9 para el backend, Next.js 14 para el portal web, .NET MAUI para la app móvil y SignalR para todo lo que tuviera que ser en tiempo real.
+\end{itemize}
+
+La figura~\cref{fig:inicio_proyecto} resume el flujo completo desde que arrancamos hasta que terminamos la implementación.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.48\textwidth]{graphics/inicio_proyecto.png}
+    \caption{Flujo general del proyecto desde el análisis hasta la entrega}
+    \label{fig:inicio_proyecto}
+\end{figure}
+
+\subsection{Fase 2: Implementación del Sistema}
+Aquí fue donde hicimos la implementacio del sistema
+
+\begin{itemize}
+    \item \textbf{Backend API:} Armamos una API RESTful completita con .NET 9 y Clean Architecture. Cada entidad tiene su controller con CRUD completo, autenticación JWT con roles y permisos, servicios de dominio con toda la lógica pesada (disponibilidad de citas, evitar choques de horario, reglas de cancelación, etc.), Entity Framework Core conectado a Oracle, y SignalR para notificaciones instantáneas.
+
+    \item \textbf{Portal web administrativo:} Lo hicimos con Next.js 14 (App Router + Server Components), TypeScript en todos lados, Zustand para el estado global, Tailwind para que quedara bonito y accesible, las tablas con paginación y filtros, dashboards, formularios validados tanto en cliente como en servidor, y el cliente de SignalR para que todo se actualice al instante.
+
+    \item \textbf{App móvil ciudadana:} .NET MAUI con MVVM puro, todas las pantallas tienen su ViewModel con Commands y ObservableProperties, consumo del API con HttpClient + manejo de tokens, SecureStorage para guardar credenciales de forma segura, y un flujo súper sencillo, buscar cita disponible → elegir fecha/hora → confirmar → listo.
+
+    \item \textbf{Integración total:} Todo habla por JSON a través de la API REST, tambien configuramos los CORS, manejo centralizado de errores, DTOs bien definidos, y SignalR con grupos y reconexión automática por si se cae la conexión.
+\end{itemize}
+
+La figura~\cref{fig:ciclo_desarrollo} muestra cómo fuimos trabajando de forma iterativa, probando y ajustando.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.45\textwidth]{graphics/ciclo_desarrollo.png}
+    \caption{Ciclo iterativo que seguimos durante el desarrollo}
+    \label{fig:ciclo_desarrollo}
+\end{figure}
+
+\subsection{Fase 3: Pruebas y Validación}
+Pruebas en el proyecto.
+
+\begin{itemize}
+    \item \textbf{Pruebas unitarias:} Con xUnit cubrimos toda la lógica crítica del dominio (validación de horarios, permisos, reglas de negocio). Superamos el 70\,\% de cobertura en las partes importantes.
+
+    \item \textbf{Pruebas de integración:} Probamos el flujo completo de punta a punta, desde que el ciudadano agenda en la app hasta que la cita queda guardada en Oracle y le llega notificación al administrador.
+
+    \item \textbf{Pruebas de carga:} Con JMeter simulamos muchos usuarios agendando al mismo tiempo. Detectamos un par de consultas lentas, les pusimos índices y quedó volando.
+
+    \item \textbf{Seguridad:} Revisamos lo típico, inyección SQL (imposible gracias a EF Core), XSS, CSRF, hashing de contraseñas con bcrypt, JWT bien firmados, etc.
+\end{itemize}
