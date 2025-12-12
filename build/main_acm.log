@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.6)  6 DEC 2025 16:51
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.30)  12 DEC 2025 00:11
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2052,94 +2052,572 @@ LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
 (Font)              scaled to size 9.0pt on input line 24.
 LaTeX Font Info:    Font shape `TU/LinLibertine(0)/b/n' will be
 (Font)              scaled to size 10.95pt on input line 24.
-(./sections/00_abstract.tex) (./sections/01_introduccion.tex) (./sections/02_re
-lacionados.tex [1.1
+(./sections/00_abstract.tex) (./sections/01_introduccion.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[1.1
 
 ]
-Underfull \vbox (badness 1616) has occurred while \output is active []
-
-) (./sections/03_metodologia.tex
-Overfull \hbox (5.64378pt too wide) in paragraph at lines 9--10
-[]\TU/LinLibertine(0)/b/n/9 Levantamiento de requerimientos: \TU/LinLibertine(0
-)/m/n/9 Hicimos varias reunio-
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 9.0pt on input line 13.
+(Font)              scaled to size 9.0pt on input line 34.
 LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/n' will be
-(Font)              scaled to size 7.0pt on input line 13.
+(Font)              scaled to size 7.0pt on input line 34.
 [2.2]
-File: graphics/inicio_proyecto.png Graphic file (type bmp)
-<graphics/inicio_proyecto.png>
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
+(Font)              scaled to size 5.4pt on input line 45.
 
-Overfull \hbox (1.87193pt too wide) in paragraph at lines 24--25
- [][] 
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[3.3]
+Overfull \hbox (2.90327pt too wide) in paragraph at lines 63--64
+\TU/LinLibertine(0)/m/n/9 porcionamos métricas concretas de rendimiento, result
+ados de prue-
  []
 
-
-Class acmart Warning: A possible image without description on input line 27.
-
-
-Overfull \hbox (3.23177pt too wide) in paragraph at lines 35--36
-[]\TU/LinLibertine(0)/b/n/9 Portal web administrativo: \TU/LinLibertine(0)/m/n/
-9 Lo hicimos con Next.js 14 (App
- []
-
-File: graphics/ciclo_desarrollo.png Graphic file (type bmp)
-<graphics/ciclo_desarrollo.png>
-
-Class acmart Warning: A possible image without description on input line 49.
-
-) (./sections/04_implementacion.tex [3.3]
-LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/it' will be
-(Font)              scaled to size 9.0pt on input line 10.
-
-Overfull \hbox (2.33356pt too wide) in paragraph at lines 58--60
-[]\TU/LinLibertine(0)/b/n/9 Los controllers: \TU/LinLibertine(0)/m/n/9 Rutas bi
-en versionadas (‘api/v1/citas‘), respues-
- []
+) (./sections/02_relacionados.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \hbox (2.07303pt too wide) in paragraph at lines 70--72
-\TU/LinLibertine(0)/m/n/9 tiempo real. En el frontend web se conecta con ‘@micr
-osoft/signalr‘,
- []
-
-
-Overfull \hbox (2.15576pt too wide) in paragraph at lines 73--75
-[]\TU/LinLibertine(0)/b/n/9 La app móvil con MAUI + MVVM: \TU/LinLibertine(0)/m
-/n/9 CommunityToolkit.MVVM
- []
-
-
-Overfull \hbox (2.088pt too wide) in paragraph at lines 73--75
-\TU/LinLibertine(0)/m/n/9 talla. Cada pantalla tiene su ViewModel con ‘[Observa
-bleProperty]‘,
- []
-
-) (./sections/05_resultados.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [4.4]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [5.5]
-Overfull \hbox (2.70152pt too wide) in paragraph at lines 49--50
-\TU/LinLibertine(0)/m/n/9 rio definidas fueron implementadas y validadas con st
-akehol-
+Overfull \hbox (5.6685pt too wide) in paragraph at lines 59--60
+\TU/LinLibertine(0)/m/n/9 pruebas de carga rigurosas, que SignalR puede manejar
+ hasta 100,000
  []
 
-) (./sections/06_discusion.tex
+
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+[6.6]) (./sections/03_metodologia.tex
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[6.6]) (./sections/07_conclusiones.tex [7.7]) (./sections/A1_apendices.tex
+LaTeX Font Info:    Font shape `TU/LinLibertine(0)/m/n' will be
+(Font)              scaled to size 7.2pt on input line 10.
+
+Overfull \hbox (6.58577pt too wide) in paragraph at lines 14--15
+\TU/LinLibertine(0)/m/n/9 traban múltiples sucursales. Sin embargo, las categor
+ías reales
+ []
+
+
+Overfull \hbox (1.78954pt too wide) in paragraph at lines 16--17
+\TU/LinLibertine(0)/m/n/9 ción hasta la tercera forma normal (3NF). Utilizamos 
+Draw.io
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[8.8])
-Overfull \hbox (16.30876pt too wide) in paragraph at lines 76--34
+[7.7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (2.37598pt too wide) in paragraph at lines 32--33
+\TU/LinLibertine(0)/m/n/9 era el camino correcto. El desafío fue implementarla 
+sin crear
+ []
+
+
+Overfull \hbox (33.67976pt too wide) in paragraph at lines 36--37
+\TU/LinLibertine(0)/m/n/9 equipo. Un desarrollador argumentaba que era .[]veren
+gineering”para
+ []
+
+
+Overfull \hbox (2.1983pt too wide) in paragraph at lines 38--39
+\TU/LinLibertine(0)/m/n/9 forward que la arquitectura del backend, principalmen
+te por-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[8.8]
+File: graphics/inicio_proyecto.png Graphic file (type bmp)
+<graphics/inicio_proyecto.png>
+
+Overfull \hbox (1.87193pt too wide) in paragraph at lines 55--56
+ [][] 
+ []
+
+
+Class acmart Warning: A possible image without description on input line 58.
+
+
+Overfull \hbox (3.16953pt too wide) in paragraph at lines 68--69
+\TU/LinLibertine(0)/m/n/9 cionaba correctamente con la configuración existente 
+de Ora-
+ []
+
+
+Overfull \hbox (6.08401pt too wide) in paragraph at lines 70--71
+\TU/LinLibertine(0)/m/n/9 rias migraciones en una sola para mantener la cordura
+. Apren-
+ []
+
+
+Underfull \vbox (badness 3525) has occurred while \output is active []
+
+[9.9]
+Overfull \hbox (4.50528pt too wide) in paragraph at lines 82--83
+\TU/LinLibertine(0)/m/n/9 siempre era obvia, y cometimos errores al intentar us
+ar hooks
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (9.13278pt too wide) in paragraph at lines 88--89
+[]\TU/LinLibertine(0)/m/n/9 La integración de Tailwind CSS con componentes de s
+hadcn/ui
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[10.10]
+Overfull \hbox (2.55826pt too wide) in paragraph at lines 96--97
+\TU/LinLibertine(0)/m/n/9 lestas. Implementamos diferentes niveles de intrusivi
+dad: no-
+ []
+
+
+Overfull \hbox (8.75177pt too wide) in paragraph at lines 100--101
+[]\TU/LinLibertine(0)/m/n/9 Implementamos el patrón MVVM rigurosamente usando C
+om-
+ []
+
+
+Overfull \hbox (1.78726pt too wide) in paragraph at lines 102--103
+\TU/LinLibertine(0)/m/n/9 para acciones de usuario, ObservableProperties para b
+inding
+ []
+
+
+Overfull \hbox (6.03677pt too wide) in paragraph at lines 104--105
+[]\TU/LinLibertine(0)/m/n/9 La implementación de HttpClient para consumo del AP
+I REST
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[11.11]
+File: graphics/ciclo_desarrollo.png Graphic file (type bmp)
+<graphics/ciclo_desarrollo.png>
+
+Class acmart Warning: A possible image without description on input line 132.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[12.12]
+Overfull \hbox (1.22476pt too wide) in paragraph at lines 170--171
+\TU/LinLibertine(0)/m/n/9 rápidamente, aunque encontraron varios flujos confuso
+s. Un
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[13.13]) (./sections/04_implementacion.tex
+LaTeX Font Info:    Font shape `TU/LinBiolinum(0)/m/it' will be
+(Font)              scaled to size 9.0pt on input line 11.
+
+Overfull \hbox (3.47026pt too wide) in paragraph at lines 11--12
+[]\TU/LinLibertine(0)/b/n/9 .NET 9: \TU/LinLibertine(0)/m/n/9 Framework princip
+al para el desarrollo del API REST
+ []
+
+
+Overfull \hbox (5.38803pt too wide) in paragraph at lines 31--32
+[]\TU/LinLibertine(0)/b/n/9 .NET MAUI: \TU/LinLibertine(0)/m/n/9 Framework mult
+iplataforma (Android/iOS) con
+ []
+
+
+Overfull \hbox (6.22252pt too wide) in paragraph at lines 56--57
+ \TU/LinBiolinum(0)/m/it/9 4.2.1. La batalla con la arquitectura del backend.[]
+ \TU/LinLibertine(0)/m/n/9 Implementar Clean
+ []
+
+[14.14]
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `inconsolata' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+Overfull \hbox (10.96217pt too wide) in paragraph at lines 75--76
+\TU/LinLibertine(0)/m/n/9 tos de ruta con versionamiento del API ([Route(.[]pi/
+v1/[controller]”)]),
+ []
+
+
+Overfull \hbox (45.35251pt too wide) in paragraph at lines 108--108
+[]\TU/inconsolata(0)/m/n/9 public class CrearCitaValidator : AbstractValidator<
+CrearCitaDto>[] 
+ []
+
+
+Overfull \hbox (19.85251pt too wide) in paragraph at lines 108--108
+[]    \TU/inconsolata(0)/m/n/9 public CrearCitaValidator(IEmpleadoRepository em
+pleados)[] 
+ []
+
+
+Overfull \hbox (1.00452pt too wide) in paragraph at lines 110--111
+[]\TU/LinLibertine(0)/m/n/9 El problema fue que FluentValidation requiere confi
+guración adi-
+ []
+
+
+Overfull \hbox (71.67754pt too wide) in paragraph at lines 115--116
+\TU/LinLibertine(0)/m/n/9 La configuración de Entity Framework Core con Oracle 
+(Oracle.EntityFrameworkCore)
+ []
+
+[15.15]
+Overfull \hbox (16.85251pt too wide) in paragraph at lines 178--178
+[]        \TU/inconsolata(0)/m/n/9 if (resource.SucursalId.ToString() == userSu
+cursalId)[] 
+ []
+
+[16.16]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (6.35251pt too wide) in paragraph at lines 263--263
+[]        \TU/inconsolata(0)/m/n/9 console.log("Error connecting, retrying in 5
+s...");[] 
+ []
+
+
+Overfull \hbox (13.85251pt too wide) in paragraph at lines 273--273
+[]    \TU/inconsolata(0)/m/n/9 const lastNotificationTime = getLastNotification
+Time();[] 
+ []
+
+[17.17]
+Overfull \hbox (3.12878pt too wide) in paragraph at lines 292--293
+\TU/LinBiolinum(0)/m/it/9 tiplataforma.[] \TU/LinLibertine(0)/m/n/9 .NET MAUI p
+rometía ”write once, run anywhere”para
+ []
+
+
+Overfull \hbox (543.35251pt too wide) in paragraph at lines 357--357
+[]\TU/inconsolata(0)/m/n/9 Cometimos el error de registrar todos los ViewModels
+ como Singleton inicialmente, lo que causó que los datos se compartieran entre 
+múltiples instancias de pages de formas inesperadas.[] 
+ []
+
+
+Overfull \hbox (64.85251pt too wide) in paragraph at lines 357--357
+[]\TU/inconsolata(0)/m/n/9 \subsubsection{Consumo de API desde móvil: Más compl
+ejo de lo esperado}[] 
+ []
+
+
+Overfull \hbox (1218.35251pt too wide) in paragraph at lines 357--357
+[]\TU/inconsolata(0)/m/n/9 Crear un ApiService centralizado para encapsular la 
+comunicación HTTP parecía simple. Configuramos HttpClient con BaseAddress del A
+PI y timeout. Pero inmediatamente nos topamos con un problema: en Android, la U
+RL localhost no apunta al mismo lugar que en el emulador de Windows. Tuvimos qu
+e usar URLs diferentes dependiendo de la plataforma:[] 
+ []
+
+
+Overfull \hbox (28.85251pt too wide) in paragraph at lines 357--357
+[]    \TU/inconsolata(0)/m/n/9 private const string BaseUrl = "http://10.0.2.2:
+5000/api/";[] 
+ []
+
+
+Overfull \hbox (33.35251pt too wide) in paragraph at lines 357--357
+[]    \TU/inconsolata(0)/m/n/9 private const string BaseUrl = "http://localhost
+:5000/api/";[] 
+ []
+
+
+Overfull \hbox (64.85251pt too wide) in paragraph at lines 357--357
+[]    \TU/inconsolata(0)/m/n/9 private const string BaseUrl = "https://api.elec
+trohuila.com/api/";[] 
+ []
+
+
+Overfull \hbox (1.06453pt too wide) in paragraph at lines 359--360
+[]\TU/LinLibertine(0)/m/n/9 El interceptor para agregar automáticamente el head
+er de Autho-
+ []
+
+
+Overfull \hbox (15.35251pt too wide) in paragraph at lines 381--381
+[]                \TU/inconsolata(0)/m/n/9 new AuthenticationHeaderValue("Beare
+r", token);[] 
+ []
+
+[18.18]
+Overfull \hbox (48.35251pt too wide) in paragraph at lines 426--426
+[]\TU/inconsolata(0)/m/n/9 CREATE INDEX IDX_CITA_FECHA_SUC ON CITAS(FECHA_HORA,
+ SUCURSAL_ID);[] 
+ []
+
+
+Overfull \hbox (4.85251pt too wide) in paragraph at lines 426--426
+[]\TU/inconsolata(0)/m/n/9 CREATE INDEX IDX_EMPLEADO_SUC ON EMPLEADOS(SUCURSAL_
+ID);[] 
+ []
+
+[19.19]
+Overfull \hbox (22.85251pt too wide) in paragraph at lines 509--509
+[]\TU/inconsolata(0)/m/n/9 public class ValidacionCitaUrgente : IValidacionCita
+Strategy[] 
+ []
+
+) (./sections/05_resultados.tex
+Underfull \vbox (badness 6396) has occurred while \output is active []
+
+[20.20]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[21.21]
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[22.22]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[23.23]
+Overfull \hbox (4.70277pt too wide) in paragraph at lines 119--120
+[]\TU/LinLibertine(0)/b/n/9 Documentación y transferencia de conocimiento: \TU/
+LinLibertine(0)/m/n/9 Documen-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+[24.24]
+Overfull \hbox (2.32127pt too wide) in paragraph at lines 151--152
+\TU/LinLibertine(0)/m/n/9 trabajo de 12, lo que significa aproximadamente 150ms
+ para hashear
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (1.91878pt too wide) in paragraph at lines 177--178
+[]\TU/LinLibertine(0)/b/n/9 Observaciones inesperadas y aprendizajes: \TU/LinLi
+bertine(0)/m/n/9 Durante las prue-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[25.25]) (./sections/06_discusion.tex
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+[26.26]
+Overfull \hbox (32.4555pt too wide) in paragraph at lines 32--33
+\TU/LinLibertine(0)/m/n/9 mework Core 9.0.1 tenía un conflicto sutil con Oracle
+.EntityFrameworkCore
+ []
+
+
+Overfull \hbox (1.72427pt too wide) in paragraph at lines 47--48
+\TU/LinLibertine(0)/m/n/9 rimiento de Electrohuila para alta disponibilidad), d
+escubrimos otro
+ []
+
+
+Underfull \vbox (badness 4279) has occurred while \output is active []
+
+[27.27]
+Overfull \hbox (41.67935pt too wide) in paragraph at lines 55--56
+\TU/LinLibertine(0)/m/n/9 nente: ”¿realmente necesita interactividad, o es pura
+mente presentacional?.[]ta
+ []
+
+
+Overfull \hbox (8.43777pt too wide) in paragraph at lines 59--60
+[]\TU/LinLibertine(0)/b/n/9 MAUI data binding y las sutilezas de MVVM: \TU/LinL
+ibertine(0)/m/n/9 El patrón MVVM
+ []
+
+
+Overfull \hbox (6.432pt too wide) in paragraph at lines 63--64
+\TU/LinLibertine(0)/m/n/9 ‘OnPropertyChanged(nameof(CanBookAppointment))‘. Olvi
+dar una
+ []
+
+
+Overfull \hbox (5.78055pt too wide) in paragraph at lines 65--66
+[]\TU/LinLibertine(0)/m/n/9 La solución llegó cuando descubrimos CommunityToolk
+it.MVVM
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+./sections/06_discusion.tex:74: Missing $ inserted.
+<inserted text> 
+                $
+l.74 var appointments = await _
+                               context.Appointments
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/06_discusion.tex:81: Missing $ inserted.
+<inserted text> 
+                $
+l.81 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (23.522pt too wide) in paragraph at lines 73--81
+[]\TU/LinLibertine(0)/m/n/9 “‘csharp var appointments = await $[][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][][][] [][]
+ []
+
+
+Overfull \hbox (26.5741pt too wide) in paragraph at lines 73--81
+[][][][][][][][][][][][][][][][][][][][] [][] [][][][][][][][][][][][][][][][][
+][][][][] [][] [][][][][][][][][][][][][][][][][] [][]
+ []
+
+./sections/06_discusion.tex:89: Missing $ inserted.
+<inserted text> 
+                $
+l.89 var appointments = await _
+                               context.Appointments
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/06_discusion.tex:100: Missing $ inserted.
+<inserted text> 
+                $
+l.100 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (20.61665pt too wide) in paragraph at lines 88--100
+[]\TU/LinLibertine(0)/m/n/9 “‘csharp var appointments = await $[][][][][][][][]
+[][][][][][][][][][][][][][][][][][][][] [][]
+ []
+
+
+Overfull \hbox (535.89767pt too wide) in paragraph at lines 88--100
+[][][][][][][][] [][] [][][][][][][][][][][][][][][][] [][] [][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][]$ 
+ []
+
+
+Overfull \hbox (1.44252pt too wide) in paragraph at lines 101--102
+[]\TU/LinLibertine(0)/m/n/9 Esto redujo el tiempo de ejecución dramáticamente p
+orque trans-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[28.28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[29.29]) (./sections/07_conclusiones.tex
+Overfull \hbox (5.73306pt too wide) in paragraph at lines 159--1
+\TU/LinLibertine(0)/m/n/9 educativo, pero quizás más importante, fue una experi
+encia de apren-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (4.88179pt too wide) in paragraph at lines 12--13
+\TU/LinLibertine(0)/b/n/9 moderna integrada: \TU/LinLibertine(0)/m/n/9 Mientras
+ que la literatura técnica abun-
+ []
+
+
+Underfull \vbox (badness 5939) has occurred while \output is active []
+
+[30.30]
+Overfull \hbox (11.5583pt too wide) in paragraph at lines 40--41
+\TU/LinLibertine(0)/m/n/9 la interfaz es técnicamente bien diseñada, algunos ci
+udadanos—
+ []
+
+[31.31]
+Underfull \vbox (badness 6859) has occurred while \output is active []
+
+[32.32]
+Overfull \hbox (26.65353pt too wide) in paragraph at lines 98--99
+\TU/LinLibertine(0)/m/n/9 cas clave: tendencias de agendamiento, tasas de asist
+encia/ausencia,
+ []
+
+
+Overfull \hbox (6.62852pt too wide) in paragraph at lines 102--103
+[]\TU/LinLibertine(0)/b/n/9 Mejoras de accesibilidad conformes a estándares WCA
+G
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 5105) has occurred while \output is active []
+
+[33.33]
+Overfull \hbox (1.70552pt too wide) in paragraph at lines 126--127
+[]\TU/LinLibertine(0)/b/n/9 Integración con plataformas de identidad nacional (
+au-
+ []
+
+
+Underfull \vbox (badness 5105) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[34.34]
+Overfull \hbox (1.77927pt too wide) in paragraph at lines 161--162
+[]\TU/LinLibertine(0)/m/n/9 Finalmente, este trabajo se sitúa en contexto más a
+mplio de trans-
+ []
+
+
+Overfull \hbox (4.095pt too wide) in paragraph at lines 163--164
+\TU/LinLibertine(0)/m/n/9 documentación comprehensiva—son universalmente aplica
+bles. Los
+ []
+
+) (./sections/A1_apendices.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[35.35])
+Overfull \hbox (16.30876pt too wide) in paragraph at lines 74--34
 []\TU/LinLibertine(0)/m/n/9 El repositorio puede consultarse en: []$[][][][][] 
 [] [] [] [][][][][][] [] [][][] [] [][][][][][][][][][][][] [][]
  []
@@ -2164,14 +2642,13 @@ rtant steps when creating your papers will ensure that the widest possible audi
 ence can ingest your work..
 
 
-Package balance Warning: You have called \balance in second column
-(balance)                Columns might not be balanced.
+Overfull \vbox (1.10951pt too high) has occurred while \output is active []
 
 (/opt/texlive/texdir/texmf-dist/tex/generic/stringenc/se-pdfdoc.def
 File: se-pdfdoc.def 2019/11/29 v1.12 stringenc: PDFDocEncoding
 ) (/opt/texlive/texdir/texmf-dist/tex/generic/stringenc/se-utf32be.def
 File: se-utf32be.def 2019/11/29 v1.12 stringenc: UTF-32BE
-) [9.9] (build/main_acm.aux
+) [36.36] (build/main_acm.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -2180,15 +2657,15 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
  ***********
 Package rerunfilecheck Info: File `main_acm.out' has not changed.
-(rerunfilecheck)             Checksum: 170D395CFF65A9999561DB7EA226141F;8363.
+(rerunfilecheck)             Checksum: E9542243D1769042DBD46D42A9E53C17;12438.
  ) 
 Here is how much of TeX's memory you used:
- 41763 strings out of 468179
- 852846 string characters out of 5435043
- 1393295 words of memory out of 5000000
- 69838 multiletter control sequences out of 15000+600000
- 634464 words of font info for 138 fonts, out of 8000000 for 9000
+ 41817 strings out of 468179
+ 853983 string characters out of 5435042
+ 1389211 words of memory out of 5000000
+ 69888 multiletter control sequences out of 15000+600000
+ 634602 words of font info for 141 fonts, out of 8000000 for 9000
  1509 hyphenation exceptions out of 8191
- 105i,13n,131p,1005b,32916s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 105i,13n,131p,2372b,32924s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on build/main_acm.xdv (9 pages, 511992 bytes).
+Output written on build/main_acm.xdv (36 pages, 2183756 bytes).

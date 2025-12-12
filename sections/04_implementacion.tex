@@ -1,85 +1,522 @@
 \section{Implementación del software}
+La implementación del Sistema de Agendamiento de Citas PQR para Electrohuila fue un proceso iterativo que nos llevó aproximadamente cuatro meses de desarrollo activo. Más allá de las decisiones tecnológicas que tomamos inicialmente, enfrentamos varios desafíos técnicos que no aparecen en los tutoriales, pero que cualquier desarrollador reconocerá: incompatibilidades entre versiones, comportamientos inesperados de frameworks, y ese momento frustrante en el que el código funciona perfectamente en tu máquina local pero falla misteriosamente en el servidor de desarrollo.
 
-La implementación del Sistema de Agendamiento de Citas PQR para Electrohuila fue una de las partes más intensas y satisfactorias del proyecto.
+Lo que comenzó como un proyecto relativamente directo se convirtió en una experiencia de aprendizaje profunda sobre integración de tecnologías empresariales. Tuvimos que balancear constantemente entre seguir las mejores prácticas que habíamos aprendido y adaptarnos a las realidades específicas de trabajar con una base de datos Oracle existente que ya tenía sus propias convenciones y restricciones.
 
 \subsection{Stack tecnológico}
-Elegimos un stack moderno, empresarial y que nos diera tranquilidad a largo plazo:
+La selección del stack fue parcialmente dictada por los requisitos de Electrohuila (principalmente la necesidad de integrarse con Oracle) y parcialmente por nuestro deseo de utilizar tecnologías modernas que facilitaran el desarrollo. Después de varias discusiones con el equipo técnico de la empresa, llegamos a este conjunto de herramientas:
 
 \subsubsection{Backend}
 \begin{itemize}
-    \item \textbf{.NET 9} → Porque es rápido, estable y tiene soporte brutal de Microsoft.
-    \item \textbf{Entity Framework Core + Oracle Provider} → Para hablar con la base de datos de Electrohuila sin dramas.
-    \item \textbf{Clean Architecture + CQRS} → Para que el código no se vuelva un desastre cuando el sistema crezca.
-    \item \textbf{SignalR} → Notificaciones en tiempo real.
-    \item \textbf{JWT + roles y permisos granulares} → Seguridad seria desde el día uno.
+    \item \textbf{.NET 9:} Framework principal para el desarrollo del API REST con C\#
+    \item \textbf{Entity Framework Core:} ORM con Oracle Provider para gestión de datos
+    \item \textbf{Clean Architecture:} Separación en capas (Domain, Application, Infrastructure, API)
+    \item \textbf{CQRS Pattern:} Separación de comandos y consultas para mejor escalabilidad
+    \item \textbf{SignalR:} Comunicación en tiempo real para notificaciones push
+    \item \textbf{JWT Authentication:} Sistema de autenticación basado en tokens
 \end{itemize}
 
-\subsubsection{Frontend Web (portal administrativo)}
+\subsubsection{Frontend Web}
 \begin{itemize}
-    \item \textbf{Next.js 14 (App Router + Server Components)} → Rendimiento brutal y SEO sin esfuerzo.
-    \item \textbf{TypeScript} → Para evitar errores tontos en producción.
-    \item \textbf{Zustand} → Estado global ligero y sin complicaciones.
-    \item \textbf{Tailwind + shadcn/ui} → Quedó bonito, responsivo y accesible con poco esfuerzo.
-    \item \textbf{Cliente SignalR} → Todo se actualiza al instante sin refrescar la página.
+    \item \textbf{Next.js 15:} Framework React con App Router y Server Components
+    \item \textbf{TypeScript:} Tipado estático para mayor seguridad en el código
+    \item \textbf{Zustand:} Librería ligera para manejo de estado global
+    \item \textbf{Tailwind CSS:} Framework de CSS utility-first para diseño responsivo
+    \item \textbf{shadcn/ui:} Componentes reutilizables y accesibles
+    \item \textbf{SignalR Client:} Cliente JavaScript para conexión en tiempo real
 \end{itemize}
 
-\subsubsection{Frontend Móvil (app ciudadana)}
+\subsubsection{Frontend Mobile}
 \begin{itemize}
-    \item \textbf{.NET MAUI} → Una sola base de código para Android e iOS, ¡punto!
-    \item \textbf{MVVM + CommunityToolkit.MVVM} → Menos código repetitivo, más felicidad.
-    \item \textbf{HttpClient + SecureStorage} → Consumo seguro del API y tokens bien guardados.
-    \item \textbf{Notificaciones locales} → Recordatorios para que el ciudadano no se olvide de su cita.
+    \item \textbf{.NET MAUI:} Framework multiplataforma (Android/iOS) con C\#
+    \item \textbf{MVVM Pattern:} Separación de lógica y presentación
+    \item \textbf{CommunityToolkit.MVVM:} Generadores de código para ViewModels
+    \item \textbf{HttpClient:} Consumo de APIs REST
+    \item \textbf{SecureStorage:} Almacenamiento seguro de tokens y credenciales
+    \item \textbf{Local Notifications:} Sistema de notificaciones locales
 \end{itemize}
 
 \subsubsection{Base de datos}
 \begin{itemize}
-    \item \textbf{Oracle Database} → La que ya usa Electrohuila (no íbamos a pelear con eso).
-    \item \textbf{Normalización 3NF + índices bien puestos} → Consultas rápidas aunque haya miles de citas.
-    \item \textbf{Stored procedures} → Para las validaciones pesadas de disponibilidad (menos viajes al servidor).
+    \item \textbf{Oracle Database:} Sistema de gestión de base de datos empresarial
+    \item \textbf{Stored Procedures:} Lógica compleja encapsulada en la base de datos
+    \item \textbf{Modelo Relacional:} Normalización 3NF con integridad referencial
+    \item \textbf{Indexes:} Optimización de consultas frecuentes
 \end{itemize}
 
 \subsubsection{Herramientas de diseño}
 \begin{itemize}
-    \item \textbf{Draw.io} → Diagramas ER, arquitectura, flujos… todo clarito.
-    \item \textbf{Figma} → Mockups que hasta los jefes de Electrohuila entendieron a la primera.
+    \item \textbf{Draw.io:} Modelado de diagramas ER y arquitectura
+    \item \textbf{Figma:} Diseño de mockups de interfaz web y móvil
 \end{itemize}
 
-\subsection{Detalles técnicos que vale la pena contar}
+\subsection{Detalles de implementación técnica}
 
-Aquí va lo más jugoso de cómo lo hicimos de verdad:
+\subsubsection{La batalla con la arquitectura del backend}
+Implementar Clean Architecture sonaba elegante en papel, pero la realidad fue considerablemente más complicada. Dividimos el proyecto en cuatro capas principales, pero nos tomó varios intentos comprender realmente dónde ubicar cada pieza de código. La capa de Dominio contiene las entidades del negocio (Cita, Empleado, Usuario, Sucursal) como POCOs sin dependencias externas. Esto fue relativamente directo.
 
-\textbf{El backend con Clean Architecture:}  
-El proyecto quedó dividido en cuatro capas claritas y nadie se queja cuando toca modificar algo:
-- Dominio → solo POCOs y reglas de negocio puras.
-- Aplicación → interfaces, DTOs y los casos de uso.
-- Infraestructura → Entity Framework, repositorios y servicios externos.
-- API → controllers, middleware y Swagger para que cualquiera entienda la API.
+El verdadero desafío surgió con la capa de Aplicación. Inicialmente, mezclamos lógica de negocio con lógica de acceso a datos, lo que rompía el principio de inversión de dependencias. Tuvimos que refactorizar tres veces hasta que finalmente entendimos que las interfaces debían definirse en Application pero implementarse en Infrastructure. Este concepto simple nos costó dos semanas de confusión.
 
-\textbf{Los controllers:}  
-Rutas bien versionadas (`api/v1/citas`), respuestas HTTP correctas, validación con FluentValidation, y un middleware que atrapa cualquier error y devuelve algo bonito y útil al frontend (nada de stack traces en producción).
+La capa de Infraestructura fue donde pasamos la mayor parte de nuestro tiempo de debugging. Implementar el acceso a datos mediante Entity Framework Core con Oracle resultó ser significativamente más complejo de lo que habíamos anticipado. Creamos el DbContext, configuraciones de entidades y repositorios, pero cada configuración tenía sus peculiaridades con Oracle.
 
-\textbf{Entity Framework con Oracle:}  
-Al principio costó (Oracle no es tan amistoso como SQL Server), pero con Fluent API configuramos todo: claves, índices, relaciones muchos-a-muchos, migraciones… y cero N+1 gracias a un buen uso de `.Include()` y proyecciones.
+Un problema particularmente frustrante fue que Oracle maneja las secuencias de manera diferente a SQL Server. Nuestro primer intento de generar IDs automáticos falló miserablemente porque olvidamos configurar las secuencias de Oracle correctamente en el Fluent API. El error que obtuvimos era críptico: "ORA-02289: sequence does not exist". Después de buscar en Stack Overflow durante horas, descubrimos que necesitábamos crear explícitamente las secuencias en Oracle y luego referenciarlas en la configuración de Entity Framework:
 
-\textbf{Seguridad:}  
-JWT firmado, claims con roles y permisos, políticas personalizadas (`[Authorize(Policy = "PuedeGestionarCitas")]`), refresh tokens y todo el hashing de contraseñas con bcrypt. Pasó las pruebas de seguridad básicas sin un solo hallazgo grave.
+\begin{verbatim}
+modelBuilder.Entity<Cita>()
+    .Property(c => c.Id)
+    .HasDefaultValueSql("CITAS_SEQ.NEXTVAL");
+\end{verbatim}
 
-\textbf{El portal web con Next.js:}  
-Aprovechamos al máximo Server Components para que las páginas carguen rapidísimo. Los componentes interactivos son Client Components con hooks normales. Todo en TypeScript, Zustand para el estado global (usuario logueado, sucursal seleccionada, etc.) y shadcn/ui para que quede profesional sin inventar la rueda.
+Este pequeño detalle no estaba claro en la documentación oficial y nos costó medio día de trabajo.
 
-\textbf{SignalR en acción:}  
-Creamos un `NotificationsHub`. Cuando alguien agenda o cancela una cita, el hub avisa al administrador en tiempo real. En el frontend web se conecta con `@microsoft/signalr`, reconexión automática y todo. ¡Ver la tabla actualizarse sola es una pasada!
+La capa de API contiene los controllers REST, middleware de autenticación/autorización, y configuración de Swagger. Aquí también cometimos errores iniciales. En nuestra primera implementación, cada controller tenía su propia lógica de validación y manejo de errores, lo que resultó en código altamente repetitivo. Refactorizamos para usar un middleware centralizado de excepciones, pero esto introdujo un nuevo problema: perdíamos contexto sobre qué controller generó el error. Eventualmente, agregamos logging estructurado con Serilog que nos permitió rastrear errores hasta su origen sin sacrificar la centralización del manejo de errores.
 
-\textbf{La app móvil con MAUI + MVVM:}  
-CommunityToolkit.MVVM nos ahorró escribir 200 líneas de INotifyPropertyChanged por pantalla. Cada pantalla tiene su ViewModel con `[ObservableProperty]`, `[RelayCommand]` y navegación limpia. El binding en XAML funciona perfecto y el código quedó súper limpio.
+\subsubsection{Controllers REST: Entre la teoría y la práctica}
+Desarrollar controllers RESTful parecía trivial después de completar varios tutoriales en línea. La realidad fue diferente. Implementamos atributos de ruta con versionamiento del API ([Route("api/v1/[controller]")]), lo cual funcionó bien. Utilizamos ActionResults apropiados (Ok, Created, BadRequest, NotFound, Unauthorized) según el resultado de cada operación.
 
-\textbf{Consumo del API desde el móvil:}  
-Un solo servicio (`ApiService`) que pone el token en cada petición, maneja errores de red, timeout, respuestas 401… todo centralizado. El token se guarda en SecureStorage y listo.
+Sin embargo, la validación de modelos nos presentó un dilema interesante. Comenzamos usando Data Annotations directamente en los DTOs:
 
-\textbf{Optimización con Oracle:}  
-Usamos SQL Developer para ver los planes de ejecución, donde veíamos full table scans, también movimos la lógica pesada de disponibilidad a stored procedures una sola llamada y Oracle hace toda la magia internamente.
+\begin{verbatim}
+public class CrearCitaDto
+{
+    [Required(ErrorMessage = "La fecha es obligatoria")]
+    public DateTime FechaHora { get; set; }
 
-\textbf{Patrones que realmente usamos:}  
-Repository + Unit of Work, Factory para crear objetos complejos, Strategy para reglas que cambian según sucursal o tipo de PQR, y la Dependency Injection en todos lados, el resultado es el código se vuelve testable, mantenible y no da miedo tocarlo.
+    [Range(1, int.MaxValue)]
+    public int EmpleadoId { get; set; }
+}
+\end{verbatim}
 
-El sistema que solo cumple con todo lo que pidió Electrohuila, sino que está construido para durar, escalar y seguir creciendo sin que se convierta en un monstruo inmanejable.
+Esto funcionaba para validaciones simples, pero cuando necesitamos validaciones que dependen de múltiples propiedades o consultas a la base de datos (por ejemplo, verificar que un empleado esté disponible en la fecha seleccionada), las Data Annotations se quedaron cortas. Migramos a FluentValidation, que nos permitió escribir validaciones más expresivas:
+
+\begin{verbatim}
+public class CrearCitaValidator : AbstractValidator<CrearCitaDto>
+{
+    public CrearCitaValidator(IEmpleadoRepository empleados)
+    {
+        RuleFor(x => x.FechaHora)
+            .Must(BeInBusinessHours)
+            .WithMessage("Las citas solo se pueden agendar
+                          en horario laboral");
+
+        RuleFor(x => x.EmpleadoId)
+            .MustAsync(async (id, cancellation) =>
+                await empleados.ExisteAsync(id))
+            .WithMessage("El empleado no existe");
+    }
+}
+\end{verbatim}
+
+El problema fue que FluentValidation requiere configuración adicional para integrarse correctamente con el pipeline de ASP.NET Core. Tuvimos un bug que nos tomó horas resolver: las validaciones asíncronas no se ejecutaban correctamente. Resultó que olvidamos registrar los validadores en el contenedor de dependencias con el lifetime correcto. Cambiar de \texttt{AddTransient} a \texttt{AddScoped} resolvió el problema.
+
+Implementar el manejo centralizado de excepciones también tuvo sus momentos interesantes. Nuestro middleware personalizado captura errores, los registra en logs, y devuelve respuestas consistentes al cliente. Pero inicialmente, estábamos perdiendo información valiosa del stack trace. Descubrimos que cuando lanzábamos una excepción desde un repositorio, pasaba por varias capas antes de llegar al middleware, y cada capa agregaba ruido al stack trace. Terminamos implementando un sistema de códigos de error personalizados que nos permitía identificar exactamente dónde se originó cada problema sin depender completamente del stack trace.
+
+\subsubsection{Entity Framework con Oracle: Un matrimonio complicado}
+La configuración de Entity Framework Core con Oracle (Oracle.EntityFrameworkCore) fue probablemente el desafío técnico más grande del proyecto. La documentación para el provider de Oracle es significativamente menos completa que la de SQL Server, y muchas de las características que esperábamos simplemente no funcionaban como anticipábamos.
+
+Creamos configuraciones de entidades utilizando Fluent API para definir llaves primarias, índices, restricciones de unicidad, y relaciones. Aquí descubrimos que Oracle tiene límites de nomenclatura de 30 caracteres para nombres de objetos (en versiones anteriores a 12.2). Varios de nuestros nombres de índices generados automáticamente excedían este límite, causando errores crípticos durante las migraciones. Tuvimos que crear nombres cortos explícitamente:
+
+\begin{verbatim}
+modelBuilder.Entity<Cita>()
+    .HasIndex(c => new { c.FechaHora, c.SucursalId })
+    .HasDatabaseName("IDX_CITA_FECHA_SUC");
+\end{verbatim}
+
+Las migraciones de Entity Framework fueron otra fuente de frustración. En desarrollo local, funcionaban perfectamente. Pero al ejecutarlas en el ambiente de QA de Electrohuila, fallaban con errores de permisos. Resultó que el usuario de base de datos que nos proporcionaron no tenía permisos para crear ciertos tipos de objetos. Después de varias reuniones con el DBA de Electrohuila, obtuvimos los permisos necesarios, pero aprendimos a siempre verificar los permisos de base de datos antes de asumir que un error es culpa de nuestro código.
+
+El problema N+1 de consultas casi nos mata en rendimiento. Inicialmente, cuando cargábamos una lista de citas, Entity Framework hacía una consulta para obtener las citas y luego una consulta adicional por cada cita para cargar el empleado relacionado. Con 50 citas, esto resultaba en 51 consultas a la base de datos. Después de medir el rendimiento con MiniProfiler y casi tener un ataque cuando vimos 200+ consultas en una sola carga de página, implementamos eager loading con Include():
+
+\begin{verbatim}
+var citas = await _context.Citas
+    .Include(c => c.Empleado)
+        .ThenInclude(e => e.Sucursal)
+    .Include(c => c.Usuario)
+    .Where(c => c.FechaHora >= DateTime.Now)
+    .ToListAsync();
+\end{verbatim}
+
+Esto redujo drásticamente el número de consultas, pero introdujo un nuevo problema: algunas consultas ahora devolvían cantidades masivas de datos porque estábamos cargando relaciones que no siempre necesitábamos. Terminamos implementando múltiples métodos de repositorio, cada uno optimizado para un caso de uso específico.
+
+La prevención de inyección SQL fue algo que tomamos muy en serio. Entity Framework usa consultas parametrizadas por defecto, lo cual es excelente. Pero teníamos algunos casos donde necesitábamos consultas SQL raw para operaciones complejas. Aquí fuimos extremadamente cuidadosos de usar parámetros en lugar de concatenación de strings. Configuramos análisis estático de código con Roslyn Analyzers que nos advertía cuando detectaba posible concatenación de SQL.
+
+\subsubsection{El sistema de autenticación que casi no funciona}
+Implementar autenticación basada en JWT parecía simple después de leer la documentación de Microsoft. En realidad, tuvimos varios problemas sutiles que solo aparecieron en producción.
+
+El flujo básico funcionaba: al iniciar sesión, el sistema genera un token firmado digitalmente con claims que incluyen UserId, Email y Roles. El middleware de autenticación valida el token en cada petición protegida. Pero nuestro primer error fue no configurar correctamente la clave de firma del token. Usamos una clave hardcodeada durante el desarrollo, y cuando llegó el momento de deployar a QA, olvidamos cambiarla a una clave desde variables de entorno. Un compañero de equipo notó esto durante code review, salvándonos de un potencial desastre de seguridad.
+
+La autorización basada en roles también tuvo sus complicaciones. Implementamos atributos [Authorize(Roles = "Admin")] en controllers, lo cual funciona bien para casos simples. Pero cuando intentamos implementar permisos más granulares (por ejemplo, "un empleado puede ver solo sus propias citas, pero un supervisor puede ver todas las citas de su sucursal"), los atributos se quedaron cortos.
+
+Migramos a políticas de autorización personalizadas:
+
+\begin{verbatim}
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("VerCitasSucursal", policy =>
+        policy.Requirements.Add(
+            new SucursalRequirement()));
+});
+
+public class SucursalHandler :
+    AuthorizationHandler<SucursalRequirement, Cita>
+{
+    protected override Task HandleRequirementAsync(
+        AuthorizationHandlerContext context,
+        SucursalRequirement requirement,
+        Cita resource)
+    {
+        var userSucursalId = context.User
+            .FindFirst("SucursalId")?.Value;
+
+        if (resource.SucursalId.ToString() == userSucursalId)
+        {
+            context.Succeed(requirement);
+        }
+
+        return Task.CompletedTask;
+    }
+}
+\end{verbatim}
+
+Este approach funcionó mucho mejor, pero nos topamos con un bug extraño: en algunos casos, el claim de SucursalId no estaba presente en el token. Después de horas de debugging, descubrimos que estábamos agregando el claim condicionalmente durante el login (solo para empleados, no para usuarios regulares), pero algunos endpoints asumían que siempre estaría presente. Agregamos validación defensiva y logging adicional para capturar estos casos.
+
+El tema de refresh tokens nos dio dolores de cabeza. Configuramos tokens de acceso con expiración de 1 hora para seguridad, pero esto significaba que los usuarios eran constantemente deslogueados. Implementamos refresh tokens con expiración de 7 días, almacenados en una tabla de base de datos. El problema fue que necesitábamos un mecanismo de limpieza para tokens expirados, o la tabla crecería indefinidamente. Creamos un background service que ejecuta cada hora:
+
+\begin{verbatim}
+public class TokenCleanupService : BackgroundService
+{
+    protected override async Task ExecuteAsync(
+        CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            await _tokenRepository
+                .EliminarTokensExpiradosAsync();
+            await Task.Delay(
+                TimeSpan.FromHours(1),
+                stoppingToken);
+        }
+    }
+}
+\end{verbatim}
+
+\subsubsection{Next.js 15: Server Components y el nuevo paradigma}
+Trabajar con Next.js 15 y su nuevo App Router fue simultáneamente emocionante y frustrante. La diferenciación entre Server Components y Client Components es poderosa, pero requiere un cambio mental significativo si vienes del mundo de React tradicional.
+
+Los Server Components se renderizan en el servidor y no envían JavaScript al cliente, lo cual es excelente para rendimiento. Pero no pueden usar hooks de React como useState o useEffect. Los Client Components son interactivos y pueden usar hooks, pero requieren descargar JavaScript al cliente. Decidir qué debe ser qué component requirió mucha reflexión.
+
+Inicialmente, marcamos casi todo como "use client" porque era más fácil y familiar. Pero cuando medimos el tamaño del bundle de JavaScript, nos horrorizamos: más de 500KB. Refactorizamos agresivamente, moviendo la mayor cantidad posible de lógica a Server Components. Esto redujo el bundle a aproximadamente 180KB, una mejora dramática.
+
+Implementamos componentes reutilizables siguiendo el principio DRY. Creamos un sistema de componentes base (Button, Input, Card, Modal) usando shadcn/ui, que nos dio componentes accesibles y bien diseñados out of the box. Pero personalizarlos para que coincidan exactamente con los diseños de Figma requirió ajustar clases de Tailwind CSS en formas que a veces contradecían las mejores prácticas de shadcn.
+
+TypeScript nos salvó de innumerables bugs. Definir interfaces para props garantiza type safety, pero también significa que cada cambio en una interface potencialmente requiere cambios en múltiples archivos. Inicialmente, esto nos pareció tedioso, pero cuando refactorizamos el modelo de datos de Cita para agregar un campo adicional, TypeScript nos mostró exactamente los 27 lugares donde necesitábamos actualizar código. Sin TypeScript, probablemente habríamos encontrado estos bugs uno por uno en runtime.
+
+El manejo de estado fue otro punto de decisión importante. Usamos Zustand para estado global (usuario autenticado, configuración del tema, notificaciones) porque es significativamente más liviano que Redux y no requiere tanto boilerplate. Pero Zustand tiene sus peculiaridades con Server Components. No puedes acceder al store de Zustand directamente desde un Server Component. Tuvimos que crear un patrón donde los Server Components pasan los datos iniciales como props a Client Components, y estos luego sincronizan con el store de Zustand.
+
+Un bug particularmente molesto fue que el store de Zustand no se persistía entre recargas de página. Los usuarios se deslogueaban cada vez que refrescaban el navegador. Implementamos persistencia con zustand/middleware/persist:
+
+\begin{verbatim}
+export const useAuthStore = create<AuthState>()(
+    persist(
+        (set) => ({
+            user: null,
+            token: null,
+            setAuth: (user, token) => set({ user, token }),
+            logout: () => set({ user: null, token: null })
+        }),
+        {
+            name: 'auth-storage',
+            storage: createJSONStorage(() => localStorage)
+        }
+    )
+);
+\end{verbatim}
+
+Pero esto introdujo un problema de hidratación: el servidor renderiza sin acceso a localStorage, pero el cliente tiene datos en localStorage. Esto causaba discrepancias entre el HTML inicial del servidor y el HTML que React renderiza en el cliente, resultando en warnings de hidratación. Resolvimos esto usando un patrón de "efecto de montaje" que solo accede al store después de que el componente se monta en el cliente.
+
+\subsubsection{SignalR: Tiempo real que no era tan en tiempo real}
+Implementar notificaciones en tiempo real con SignalR sonaba straightforward en teoría. En el backend, configuramos un Hub de SignalR (NotificationsHub) que permite conexiones persistentes con clientes. Implementamos métodos para enviar notificaciones a usuarios específicos, grupos de usuarios, o broadcast a todos.
+
+El primer problema fue la autenticación de conexiones SignalR. Los tokens JWT que funcionaban perfectamente para las peticiones HTTP no funcionaban con SignalR porque SignalR usa WebSockets, no HTTP regular. Tuvimos que configurar el token de manera diferente:
+
+\begin{verbatim}
+// En el cliente
+const connection = new HubConnectionBuilder()
+    .withUrl("/hubs/notifications", {
+        accessTokenFactory: () => getToken()
+    })
+    .withAutomaticReconnect()
+    .build();
+\end{verbatim}
+
+Pero esto todavía fallaba intermitentemente. Después de capturar tráfico de red con las DevTools, descubrimos que en el primer intento de conexión, el token no siempre estaba disponible todavía. Agregamos lógica de retry:
+
+\begin{verbatim}
+async function startConnection() {
+    try {
+        await connection.start();
+        console.log("SignalR Connected");
+    } catch (err) {
+        console.log("Error connecting, retrying in 5s...");
+        setTimeout(startConnection, 5000);
+    }
+}
+\end{verbatim}
+
+Las reconexiones automáticas también tuvieron sus problemas. Cuando un usuario perdía conexión temporalmente (por ejemplo, pasando por un túnel con el móvil), SignalR intentaba reconectar. Pero cuando finalmente se reconectaba, el usuario había perdido todas las notificaciones que llegaron durante la desconexión. Implementamos un mecanismo de "sincronización al reconectar" donde el cliente solicita todas las notificaciones perdidas basándose en la última timestamp que recibió:
+
+\begin{verbatim}
+connection.onreconnected(async () => {
+    const lastNotificationTime = getLastNotificationTime();
+    await connection.invoke("SyncNotifications",
+        lastNotificationTime);
+});
+\end{verbatim}
+
+En el frontend web, suscribir listeners a eventos específicos (nuevaCita, citaCancelada, citaModificada) funcionó bien, pero tuvimos que ser cuidadosos con memory leaks. Si un componente se desmonta sin desuscribirse del hub, el listener sigue existiendo, causando comportamiento extraño y uso innecesario de memoria. Implementamos cleanup en useEffect:
+
+\begin{verbatim}
+useEffect(() => {
+    const handler = (cita) => {
+        // Actualizar UI
+    };
+
+    connection.on("nuevaCita", handler);
+
+    return () => {
+        connection.off("nuevaCita", handler);
+    };
+}, []);
+\end{verbatim}
+
+\subsubsection{MAUI: Desarrollo móvil multiplataforma que no fue tan multiplataforma}
+.NET MAUI prometía "write once, run anywhere" para Android y iOS. La realidad fue más cercana a "write once, debug everywhere". Implementar el patrón MVVM fue relativamente directo. Separamos claramente la lógica de presentación (ViewModels) de las vistas (XAML).
+
+CommunityToolkit.MVVM redujo significativamente el boilerplate mediante source generators. Antes de usarlo, nuestros ViewModels se veían así:
+
+\begin{verbatim}
+private string _nombre;
+public string Nombre
+{
+    get => _nombre;
+    set
+    {
+        if (_nombre != value)
+        {
+            _nombre = value;
+            OnPropertyChanged();
+        }
+    }
+}
+\end{verbatim}
+
+Con CommunityToolkit.MVVM, esto se simplificó a:
+
+\begin{verbatim}
+[ObservableProperty]
+private string nombre;
+\end{verbatim}
+
+El source generator automáticamente crea la propiedad pública con notificación de cambios. Esto ahorró cientos de líneas de código boilerplate.
+
+Sin embargo, los source generators tienen sus problemas. El IntelliSense de Visual Studio a veces no reconocía las propiedades generadas, mostrando errores rojos en código que compilaba perfectamente. Tuvimos que reiniciar Visual Studio múltiples veces al día, lo cual era increíblemente frustrante.
+
+El data binding bidireccional entre ViewModels y XAML también tuvo sus momentos. Un bug que nos tomó horas fue que los cambios en ciertas propiedades no actualizaban la UI. Resultó que olvidamos marcar la clase base del ViewModel con [ObservableObject]:
+
+\begin{verbatim}
+[ObservableObject]
+public partial class CitasViewModel
+{
+    [ObservableProperty]
+    private ObservableCollection<Cita> citas;
+}
+\end{verbatim}
+
+El "partial" es crítico para que los source generators funcionen, pero Visual Studio no te da ningún error si lo olvidas, solo silenciosamente no genera el código.
+
+La inyección de dependencias en MAUI requirió configuración explícita en MauiProgram.cs:
+
+\begin{verbatim}
+builder.Services.AddSingleton<ApiService>();
+builder.Services.AddTransient<CitasViewModel>();
+builder.Services.AddTransient<CitasPage>();
+\end{verbatim>
+
+Cometimos el error de registrar todos los ViewModels como Singleton inicialmente, lo que causó que los datos se compartieran entre múltiples instancias de pages de formas inesperadas.
+
+\subsubsection{Consumo de API desde móvil: Más complejo de lo esperado}
+Crear un ApiService centralizado para encapsular la comunicación HTTP parecía simple. Configuramos HttpClient con BaseAddress del API y timeout. Pero inmediatamente nos topamos con un problema: en Android, la URL localhost no apunta al mismo lugar que en el emulador de Windows. Tuvimos que usar URLs diferentes dependiendo de la plataforma:
+
+\begin{verbatim}
+#if ANDROID
+    private const string BaseUrl = "http://10.0.2.2:5000/api/";
+#elif IOS
+    private const string BaseUrl = "http://localhost:5000/api/";
+#else
+    private const string BaseUrl = "https://api.electrohuila.com/api/";
+#endif
+\end{verbatim}
+
+El interceptor para agregar automáticamente el header de Authorization fue complicado porque HttpClient no tiene un concepto nativo de interceptors como en Angular. Implementamos un DelegatingHandler personalizado:
+
+\begin{verbatim}
+public class AuthHandler : DelegatingHandler
+{
+    protected override async Task<HttpResponseMessage>
+        SendAsync(HttpRequestMessage request,
+                  CancellationToken cancellationToken)
+    {
+        var token = await SecureStorage
+            .GetAsync("auth_token");
+
+        if (!string.IsNullOrEmpty(token))
+        {
+            request.Headers.Authorization =
+                new AuthenticationHeaderValue("Bearer", token);
+        }
+
+        return await base.SendAsync(request,
+                                     cancellationToken);
+    }
+}
+\end{verbatim}
+
+Manejar errores HTTP fue particularmente desafiante en móvil porque hay más formas en que las cosas pueden fallar: sin conexión de red, timeouts, certificados SSL inválidos en desarrollo, etc. Implementamos un sistema robusto de manejo de errores:
+
+\begin{verbatim}
+try
+{
+    var response = await _httpClient.GetAsync("citas");
+    response.EnsureSuccessStatusCode();
+    return await response.Content
+        .ReadFromJsonAsync<List<CitaDto>>();
+}
+catch (HttpRequestException ex)
+{
+    // Sin conexión o error de red
+    await Shell.Current.DisplayAlert("Error",
+        "No se pudo conectar al servidor", "OK");
+}
+catch (TaskCanceledException ex)
+{
+    // Timeout
+    await Shell.Current.DisplayAlert("Error",
+        "La petición tardó demasiado", "OK");
+}
+catch (JsonException ex)
+{
+    // Error deserializando respuesta
+    _logger.LogError(ex,
+        "Error deserializando respuesta del API");
+}
+\end{verbatim}
+
+SecureStorage para almacenar tokens funcionó bien en Android, pero en iOS durante development, a veces perdía los datos entre ejecuciones de la app. Nunca descubrimos completamente por qué, pero sospechamos que tiene que ver con cómo el simulador de iOS maneja el keychain. En dispositivos físicos iOS no tuvimos este problema.
+
+\subsubsection{Optimización de Oracle: De consultas lentas a aceptables}
+Las consultas a Oracle Database inicialmente eran dolorosamente lentas. Una consulta simple para obtener las citas del día tomaba 3-4 segundos. Obviamente, esto era inaceptable.
+
+Usamos Oracle SQL Developer para analizar planes de ejecución. Descubrimos que muchas de nuestras consultas estaban haciendo full table scans en tablas con miles de registros. El problema era la falta de índices apropiados.
+
+Agregamos índices en columnas frecuentemente utilizadas en cláusulas WHERE, JOIN y ORDER BY:
+
+\begin{verbatim}
+CREATE INDEX IDX_CITA_FECHA_SUC ON CITAS(FECHA_HORA, SUCURSAL_ID);
+CREATE INDEX IDX_EMPLEADO_SUC ON EMPLEADOS(SUCURSAL_ID);
+CREATE INDEX IDX_CITA_USUARIO ON CITAS(USUARIO_ID);
+\end{verbatim}
+
+Estos índices redujeron el tiempo de consulta de 3-4 segundos a aproximadamente 200-300ms, una mejora dramática. Pero introdujeron un nuevo problema: las operaciones de INSERT se volvieron más lentas porque Oracle tenía que actualizar los índices. Para la mayoría de nuestros casos de uso esto era aceptable, pero para una operación específica de importación masiva de citas, tuvimos que temporalmente deshabilitar los índices, hacer el import, y luego reconstruirlos.
+
+Refactorizar consultas con múltiples JOINs también ayudó. Teníamos una consulta que hacía JOIN en cuatro tablas:
+
+\begin{verbatim}
+SELECT c.*, e.*, s.*, u.*
+FROM CITAS c
+INNER JOIN EMPLEADOS e ON c.EMPLEADO_ID = e.ID
+INNER JOIN SUCURSALES s ON e.SUCURSAL_ID = s.ID
+INNER JOIN USUARIOS u ON c.USUARIO_ID = u.ID
+WHERE c.FECHA_HORA >= SYSDATE
+\end{verbatim}
+
+El plan de ejecución mostraba que Oracle estaba creando productos cartesianos intermedios masivos. Reescribimos la consulta usando subqueries y mejoramos el orden de JOINs basándonos en cardinalidad:
+
+\begin{verbatim}
+SELECT c.*, e.NOMBRE AS EMPLEADO_NOMBRE,
+       s.NOMBRE AS SUCURSAL_NOMBRE,
+       u.EMAIL AS USUARIO_EMAIL
+FROM CITAS c
+INNER JOIN EMPLEADOS e ON c.EMPLEADO_ID = e.ID
+INNER JOIN SUCURSALES s ON e.SUCURSAL_ID = s.ID
+INNER JOIN USUARIOS u ON c.USUARIO_ID = u.ID
+WHERE c.FECHA_HORA >= SYSDATE
+\end{verbatim}
+
+Para lógica compleja de validación de disponibilidad que requiere múltiples consultas, implementamos stored procedures en Oracle. Esto redujo los round-trips entre la aplicación y la base de datos. Por ejemplo, verificar si un empleado está disponible requería tres consultas separadas: una para verificar que existe el empleado, otra para verificar que está activo, y otra para verificar que no tiene otra cita a esa hora. Encapsular esto en un stored procedure redujo tres round-trips a uno:
+
+\begin{verbatim}
+CREATE OR REPLACE PROCEDURE VERIFICAR_DISPONIBILIDAD(
+    p_empleado_id IN NUMBER,
+    p_fecha_hora IN TIMESTAMP,
+    p_disponible OUT NUMBER
+)
+IS
+    v_count NUMBER;
+BEGIN
+    SELECT COUNT(*)
+    INTO v_count
+    FROM EMPLEADOS e
+    WHERE e.ID = p_empleado_id
+        AND e.ACTIVO = 1
+        AND NOT EXISTS (
+            SELECT 1 FROM CITAS c
+            WHERE c.EMPLEADO_ID = p_empleado_id
+                AND c.FECHA_HORA = p_fecha_hora
+        );
+
+    IF v_count > 0 THEN
+        p_disponible := 1;
+    ELSE
+        p_disponible := 0;
+    END IF;
+END;
+\end{verbatim}
+
+\subsubsection{Patrones de diseño: Teoría vs práctica}
+Aplicar patrones de diseño fue educativo pero a veces nos fuimos al extremo. El patrón Repository para abstraer el acceso a datos funcionó bien y efectivamente nos permitió cambiar implementaciones sin afectar la lógica de negocio. Pero inicialmente creamos demasiadas abstracciones. Teníamos interfaces con un solo método siendo implementadas por una sola clase, lo cual solo agregaba complejidad sin beneficio real.
+
+El patrón Unit of Work para gestionar transacciones que involucran múltiples operaciones fue útil, especialmente cuando creábamos una cita (lo cual involucra insertar en tabla CITAS y actualizar disponibilidad del empleado). Pero tuvimos bugs sutiles con el tiempo de vida de DbContext. Si un Unit of Work vivía demasiado tiempo, Entity Framework empezaba a trackear demasiadas entidades, causando degradación de rendimiento.
+
+Factory Pattern para creación de objetos complejos con múltiples dependencias nos ayudó, pero en retrospectiva probablemente podríamos haber logrado lo mismo con constructores bien diseñados y dependency injection. Nos dimos cuenta de que a veces estábamos usando patrones solo por usar patrones, no porque realmente resolvieran un problema.
+
+Strategy Pattern para lógicas de validación variables fue uno de los patrones más útiles. Diferentes tipos de citas (urgente, normal, seguimiento) tienen diferentes reglas de validación. En lugar de tener un método gigante lleno de if-else, creamos estrategias:
+
+\begin{verbatim}
+public interface IValidacionCitaStrategy
+{
+    Task<ValidationResult> ValidarAsync(Cita cita);
+}
+
+public class ValidacionCitaUrgente : IValidacionCitaStrategy
+{
+    public async Task<ValidationResult> ValidarAsync(
+        Cita cita)
+    {
+        // Las citas urgentes pueden agendarse
+        // fuera de horario normal
+        return ValidationResult.Success;
+    }
+}
+\end{verbatim}
+
+Dependency Injection la usamos extensivamente, lo cual facilitó enormemente el testing. Pero configurar correctamente los lifetimes (Singleton vs Scoped vs Transient) requirió varios intentos. Tuvimos un bug donde un Singleton tenía una dependencia Scoped, lo cual causaba excepciones en runtime que no eran obvias en development pero aparecían en producción bajo carga.
+
+\subsection{Reflexiones sobre el proceso}
+Mirando hacia atrás, el proceso de implementación fue significativamente más complejo de lo que anticipamos inicialmente. Los tutoriales y la documentación oficial te muestran el "happy path", pero el desarrollo real está lleno de casos extremos, configuraciones específicas de entorno, y problemas de integración que solo descubres cuando intentas que todo funcione junto.
+
+Lo más valioso que aprendimos fue la importancia de la iteración. Nuestra primera implementación de casi todos los componentes fue subóptima. No fue hasta la segunda o tercera refactorización que llegamos a soluciones que realmente funcionaban bien. Aceptar que el código perfecto en el primer intento es imposible nos ayudó a avanzar más rápidamente.
+
+También aprendimos que la ayuda de herramientas de IA, mientras útil para generar código boilerplate y sugerir soluciones, no reemplaza la comprensión profunda de las tecnologías. Muchas veces las sugerencias de IA funcionaban superficialmente pero tenían problemas sutiles que solo descubríamos más tarde. La IA fue más útil como una herramienta de consulta rápida que como un generador de soluciones completas.
+
+El debugging consumió probablemente el 40\% de nuestro tiempo de desarrollo. Aprender a usar efectivamente las herramientas de debugging (breakpoints condicionales, logging estructurado, análisis de performance) fue tan importante como aprender los frameworks mismos.
+
+Finalmente, trabajar con una base de datos Oracle existente con sus propias convenciones nos enseñó mucho sobre adaptabilidad. No siempre puedes diseñar el sistema ideal desde cero; a menudo tienes que trabajar con restricciones existentes y encontrar la mejor solución dentro de esas limitaciones.

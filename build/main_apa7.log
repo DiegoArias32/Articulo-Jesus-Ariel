@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.12.6)  6 DEC 2025 16:52
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.30)  12 DEC 2025 00:12
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1238,10 +1238,36 @@ Package biblatex Info: Reference section=0 on input line 16.
 Package biblatex Info: Reference segment=0 on input line 16.
 [1
 
-] (./sections/00_abstract.tex) [2] [3] (./sections/01_introduccion.tex [4]) (./
-sections/02_relacionados.tex [5]
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
-.
+] (./sections/00_abstract.tex)
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[2] [3] (./sections/01_introduccion.tex [4]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[5]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[7]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[8]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[11]) (./sections/02_relacionados.tex
+Underfull \vbox (badness 1406) has occurred while \output is active []
+
+[12] [13]
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+3.
 (/opt/texlive/texdir/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1249,53 +1275,205 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmr' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
-.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+3.
 (/opt/texlive/texdir/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-9.
+13.
 (/opt/texlive/texdir/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-9.
+13.
 (/opt/texlive/texdir/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 9.
+(Font)              <12> on input line 13.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 9.
+(Font)              <8> on input line 13.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 9.
-[6]) (./sections/03_metodologia.tex [7] [8]
-\openout5 = `main_apa7.fff'.
-
-(main_apa7.fff) [9]) (./sections/04_implementacion.tex [10] [11] [12]) (./secti
-ons/05_resultados.tex [13] [14]
+(Font)              <6> on input line 13.
+[14]
 Underfull \vbox (badness 4752) has occurred while \output is active []
 
-[15] [16] [17]) (./sections/06_discusion.tex [18] [19] [20]) (./sections/07_con
-clusiones.tex [21] [22] [23] [24]) (./sections/A1_apendices.tex [25] [26] (buil
-d/main_apa7.fff
+[15] [16] [17] [18] [19] [20]) (./sections/03_metodologia.tex
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[21] [22] [23] [24] [25]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[26] [27]
+\openout5 = `main_apa7.fff'.
+
+(main_apa7.fff) [28] [29] [30] [31]
+Underfull \vbox (badness 3068) has occurred while \output is active []
+
+[32] [33] [34] [35] [36] [37] [38] [39] [40]) (./sections/04_implementacion.tex
+[41] [42] [43] [44]
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+[45] [46] [47] [48] [49] [50] [51]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[52]
+Underfull \vbox (badness 5388) has occurred while \output is active []
+
+[53] [54] [55] [56] [57]
+Overfull \hbox (661.18478pt too wide) in paragraph at lines 357--357
+[]\TU/lmtt/m/n/12 Cometimos el error de registrar todos los ViewModels como Sin
+gleton inicialmente, lo que causó que los datos se compartieran entre múltiples
+ instancias de pages de formas inesperadas.[] 
+ []
+
+
+Overfull \hbox (1637.6247pt too wide) in paragraph at lines 357--357
+[]\TU/lmtt/m/n/12 Crear un ApiService centralizado para encapsular la comunicac
+ión HTTP parecía simple. Configuramos HttpClient con BaseAddress del API y time
+out. Pero inmediatamente nos topamos con un problema: en Android, la URL localh
+ost no apunta al mismo lugar que en el emulador de Windows. Tuvimos que usar UR
+Ls diferentes dependiendo de la plataforma:[] 
+ []
+
+[58] [59] [60] [61] [62] [63] [64]) (./sections/05_resultados.tex [65]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[66]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[67]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[68]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[69]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[70] [71]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[72]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[73]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[74] [75]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[76]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[77] [78]
+Underfull \vbox (badness 1406) has occurred while \output is active []
+
+[79]
+Underfull \vbox (badness 1406) has occurred while \output is active []
+
+[80]
+Underfull \vbox (badness 1406) has occurred while \output is active []
+
+[81]) (./sections/06_discusion.tex
+Underfull \vbox (badness 1867) has occurred while \output is active []
+
+[82]
+Underfull \vbox (badness 1221) has occurred while \output is active []
+
+[83]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[84] [85]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[86] [87]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[88]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[89]
+./sections/06_discusion.tex:74: Missing $ inserted.
+<inserted text> 
+                $
+l.74 var appointments = await _
+                               context.Appointments
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/06_discusion.tex:81: Missing $ inserted.
+<inserted text> 
+                $
+l.81 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[90]
+./sections/06_discusion.tex:89: Missing $ inserted.
+<inserted text> 
+                $
+l.89 var appointments = await _
+                               context.Appointments
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./sections/06_discusion.tex:100: Missing $ inserted.
+<inserted text> 
+                $
+l.100 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (500.36714pt too wide) in paragraph at lines 88--100
+\OML/lmm/m/it/12 newAppointmentDto[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 :ToListAs
+ync\OT1/lmr/m/n/12 (); \`$  
+ []
+
+[91]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[92]
+Underfull \vbox (badness 2435) has occurred while \output is active []
+
+[93]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[94] [95]) (./sections/07_conclusiones.tex [96] [97] [98]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[99] [100] [101] [102] [103]
+Underfull \vbox (badness 5331) has occurred while \output is active []
+
+[104] [105] [106] [107] [108] [109]
+Underfull \vbox (badness 4752) has occurred while \output is active []
+
+[110]) (./sections/A1_apendices.tex [111] (build/main_apa7.fff
 File: graphics/inicio_proyecto.png Graphic file (type bmp)
 <graphics/inicio_proyecto.png>
-[27
+[112
 
 ]
 File: graphics/ciclo_desarrollo.png Graphic file (type bmp)
 <graphics/ciclo_desarrollo.png>
-) [28
+) [113
 
-] [29
+] [114
 
-] [30
+] [115
 
-] [31]) [32
+] [116]) [117
 
-] AED endfloat: Processing end Figures and Tables [33
+] AED endfloat: Processing end Figures and Tables [118
 
 
 ] (build/main_apa7.aux
@@ -1308,18 +1486,18 @@ LaTeX2e <2025-11-01>
 L3 programming layer <2025-11-14>
  ***********
 Package rerunfilecheck Info: File `main_apa7.out' has not changed.
-(rerunfilecheck)             Checksum: 7AB779AE15D43BEF0AFC1EA568EA6E31;7654.
+(rerunfilecheck)             Checksum: 69EC2A75A16A1A647A24F3FD0847AD1B;14924.
 Package logreq Info: Writing requests to 'main_apa7.run.xml'.
 \openout1 = `main_apa7.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 43392 strings out of 468179
- 921517 string characters out of 5435043
- 1888398 words of memory out of 5000000
- 71546 multiletter control sequences out of 15000+600000
- 652939 words of font info for 65 fonts, out of 8000000 for 9000
+ 43480 strings out of 468179
+ 923733 string characters out of 5435042
+ 1895856 words of memory out of 5000000
+ 71628 multiletter control sequences out of 15000+600000
+ 652963 words of font info for 68 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 99i,12n,118p,1006b,5084s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,12n,118p,2354b,5084s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on build/main_apa7.xdv (33 pages, 493484 bytes).
+Output written on build/main_apa7.xdv (118 pages, 2161592 bytes).

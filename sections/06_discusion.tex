@@ -1,51 +1,159 @@
 \section{Discusión}
-La experiencia de desarrollo del Sistema de Agendamiento de Citas PQR para Electrohuila proporciona valiosas lecciones sobre la aplicación de principios de ingeniería de software moderna en proyectos empresariales reales.
+La experiencia de desarrollar el Sistema de Agendamiento de Citas PQR para Electrohuila nos proporcionó lecciones que van mucho más allá del simple ejercicio de escribir código. Mirando atrás, nos damos cuenta de que cada decisión técnica que tomamos llevaba consigo implicaciones que no siempre anticipamos completamente en el momento. Este proyecto nos enseñó tanto sobre ingeniería de software moderna como sobre la importancia de comprender el contexto humano y organizacional en el que operaría nuestra solución.
 
-\subsection{Decisiones arquitectónicas}
-La elección de Clean Architecture como patrón arquitectónico principal demostró ser acertada para este proyecto. La separación en capas independientes facilitó el desarrollo paralelo de diferentes componentes del sistema. El equipo backend pudo trabajar en la lógica de negocio sin esperar definiciones completas de la interfaz, mientras que el equipo frontend pudo crear mockups funcionales consumiendo contratos de API definidos mediante DTOs. Esta independencia aceleró el desarrollo y facilitó la realización de pruebas unitarias.
+\subsection{Decisiones arquitectónicas y sus consecuencias reales}
+La elección de Clean Architecture como patrón arquitectónico principal fue probablemente la decisión más significativa del proyecto, y ciertamente la más debatida dentro del equipo durante las primeras semanas. Recuerdo claramente las discusiones iniciales donde algunos miembros del equipo argumentaban que estábamos "sobre-ingenieriando" la solución, especialmente considerando que este era un proyecto académico. En retrospectiva, entiendo perfectamente ese escepticismo inicial.
 
-Sin embargo, Clean Architecture introduce una curva de aprendizaje inicial significativa. La comprensión de conceptos como inversión de dependencias, interfaces de repositorio, y separación entre entidades de dominio y DTOs requirió tiempo de estudio y práctica. Para proyectos más pequeños o con equipos menos experimentados, arquitecturas más simples podrían ser más apropiadas. En el contexto educativo del SENA, esta complejidad adicional se justificó por el valor de aprendizaje y la preparación para proyectos empresariales reales.
+Clean Architecture introdujo una complejidad estructural que, durante las primeras dos o tres semanas, parecía ralentizarnos considerablemente. La necesidad de crear interfaces para cada repositorio, definir entidades de dominio separadas de los modelos de base de datos, y mantener DTOs distintos para cada caso de uso generó código que, superficialmente, parecía redundante. Hubo momentos de frustración donde nos preguntábamos si realmente necesitábamos toda esta infraestructura para un sistema de agendamiento de citas.
 
-La decisión de utilizar Oracle Database en lugar de alternativas como PostgreSQL o SQL Server se basó en requerimientos específicos de Electrohuila, que ya utiliza Oracle en otros sistemas. Si bien Entity Framework Core proporciona abstracción sobre la base de datos, se encontraron algunas peculiaridades del provider de Oracle que requirieron atención especial, como el mapeo de tipos de datos específicos (NUMBER, VARCHAR2, DATE) y la configuración de secuencias para generación de IDs.
+Sin embargo, la apuesta por esta arquitectura demostró su valor de manera dramática alrededor de la mitad del proyecto, cuando Electrohuila solicitó cambios significativos en cómo se manejaban las notificaciones. Gracias a la separación de capas, pudimos modificar completamente la implementación del servicio de notificaciones sin tocar ni una línea de la lógica de negocio. El equipo backend pudo trabajar en la nueva implementación usando SignalR mientras el equipo frontend continuaba desarrollando interfaces consumiendo los mismos contratos. Esta experiencia nos mostró visceralmente el valor de la inversión de dependencias y la separación de responsabilidades.
 
-\subsection{Ventajas del stack tecnológico seleccionado}
-El stack basado en .NET para backend y móvil, combinado con Next.js para web, ofreció ventajas significativas:
+Dicho esto, la curva de aprendizaje fue considerable y, en un contexto puramente comercial con presiones de tiempo extremas, podría haber sido problemática. Los primeros pull requests eran objeto de largas sesiones de revisión donde debatíamos si cierta lógica pertenecía a la capa de aplicación o dominio, o si un determinado objeto debería ser una entidad o un value object. Estos debates, aunque a veces parecían bizantinos, fueron fundamentales para desarrollar una comprensión compartida de los principios arquitectónicos.
 
-\textbf{Reutilización de código:} El uso de C\# tanto en el backend (.NET Core) como en la aplicación móvil (.NET MAUI) permitió compartir modelos, validaciones y lógica de cliente. Esto redujo duplicación de código y garantizó consistencia en el comportamiento entre plataformas.
+Para equipos menos experimentados o proyectos genuinamente pequeños, arquitecturas más simples como una estructura de tres capas tradicional (presentación, negocio, datos) probablemente serían más apropiadas. La pregunta clave que aprendimos a hacernos no es "¿cuál es la mejor arquitectura?" sino "¿cuál es la arquitectura apropiada dado nuestro contexto, equipo y requisitos de evolución futura?"
 
-\textbf{Type safety end-to-end:} TypeScript en el frontend web y C\# en backend/móvil proporcionaron seguridad de tipos en toda la aplicación. Los errores de tipos se detectan en tiempo de compilación en lugar de tiempo de ejecución, reduciendo significativamente bugs en producción.
+La decisión de utilizar Oracle Database merece una discusión aparte. Inicialmente, varios miembros del equipo preferían PostgreSQL, principalmente por familiaridad y por la riqueza de recursos en línea. La decisión de usar Oracle vino determinada por los requerimientos de Electrohuila, que opera toda su infraestructura de bases de datos sobre Oracle y tiene políticas corporativas estrictas al respecto.
 
-\textbf{Ecosistema maduro:} Tanto .NET como React/Next.js cuentan con ecosistemas maduros con abundante documentación, bibliotecas de terceros bien mantenidas, y comunidades activas. Esto facilitó encontrar soluciones a problemas comunes y mejores prácticas establecidas.
+En la práctica, esta decisión nos enseñó lecciones valiosas sobre trabajar con restricciones del mundo real. Si bien Entity Framework Core teóricamente abstrae las diferencias entre proveedores de bases de datos, descubrimos que "teoría" y "práctica" no siempre coinciden perfectamente. El provider de Oracle tiene comportamientos específicos que requirieron atención especial. Por ejemplo, el mapeo automático de tipos .NET a tipos Oracle a veces producía resultados inesperados: un `DateTime` en C\# podría mapearse a `DATE` o `TIMESTAMP` dependiendo del contexto, y las diferencias semánticas entre estos tipos Oracle causaron bugs sutiles relacionados con zonas horarias.
 
-\textbf{Performance:} .NET Core 8 ofrece rendimiento excelente para APIs REST, con latencias bajas y capacidad de manejar miles de peticiones concurrentes. Next.js con Server Components optimiza el tiempo de carga inicial de páginas web mediante renderizado en servidor.
+Más frustrante aún fue el manejo de secuencias para generación de IDs. Oracle usa secuencias para auto-incrementos en lugar del patrón `IDENTITY` de SQL Server, y configurar Entity Framework para trabajar correctamente con secuencias requirió configuración explícita en Fluent API. Pasamos casi una tarde completa depurando un error donde los IDs generados se desincronizaban entre la aplicación y la base de datos porque la caché de secuencias de Oracle estaba configurada incorrectamente.
 
-Sin embargo, también se identificaron algunos desafíos: la compatibilidad entre versiones de paquetes NuGet a veces causó conflictos que requirieron resolución manual. El ecosistema de MAUI, siendo relativamente nuevo, tiene menos componentes de terceros comparado con alternativas más maduras como React Native o Flutter.
+Estas experiencias nos enseñaron que la abstracción siempre tiene límites, y que conocer los detalles específicos de tu base de datos sigue siendo importante incluso cuando usas un ORM moderno. En hindsight, deberíamos haber dedicado más tiempo al inicio del proyecto a estudiar las particularidades del provider de Oracle en lugar de asumir que "simplemente funcionaría".
 
-\subsection{Desafíos técnicos enfrentados}
-Durante el desarrollo se enfrentaron varios desafíos técnicos significativos:
+\subsection{El stack tecnológico: beneficios reales y dolores inesperados}
+La decisión de usar .NET para backend y móvil, combinado con Next.js para web, surgió de un análisis de trade-offs que ahora, viéndolo en retrospectiva, fue más acertado de lo que esperábamos en algunos aspectos y más problemático en otros.
 
-\textbf{Configuración de SignalR:} La implementación de comunicación en tiempo real con SignalR presentó complejidad en escenarios de reconexión automática. Fue necesario implementar lógica de reintento con backoff exponencial y mecanismos para reestablecer suscripciones a grupos después de reconexiones. El manejo de múltiples instancias del backend requirió configuración de backplane con Redis para sincronizar notificaciones.
+La reutilización de código entre backend y móvil fue genuinamente transformadora. Inicialmente pensábamos que el beneficio principal sería compartir modelos de datos, pero el valor real resultó ser mucho más profundo. Compartimos validaciones completas, lógica de formateo de datos, y hasta pequeñas utilidades que garantizaron comportamiento absolutamente idéntico entre las plataformas. Hubo un momento particular que recuerdo claramente: habíamos implementado validación compleja para números de documento de identidad que debía verificar dígitos de control. Esta validación existía en el backend como parte de las reglas de negocio, pero también necesitábamos ejecutarla en el móvil para feedback inmediato al usuario. Gracias a usar C\# en ambos lados, simplemente creamos un proyecto de biblioteca compartida y referenciamos la misma implementación exacta en ambos contextos. Esto no solo nos ahorró tiempo, sino que eliminó por completo la posibilidad de inconsistencias en esta validación crítica.
 
-\textbf{Server Components vs Client Components en Next.js:} La diferenciación entre Server Components y Client Components en Next.js 14 fue inicialmente confusa. Errores de hidratación ocurrieron cuando se intentó usar hooks de React en Server Components. La solución requirió diseño cuidadoso de la arquitectura de componentes, separando claramente componentes que necesitan interactividad (Client) de componentes puramente de presentación (Server).
+La seguridad de tipos end-to-end que obtuvimos usando TypeScript en frontend y C\# en backend fue otro beneficio que apreciamos más con el tiempo. Durante las primeras iteraciones, algunos miembros del equipo sentían que los tipos eran "burocracia adicional" que ralentizaba el desarrollo. Pero cuando llegó el momento de refactorizar la estructura de DTOs para acomodar nuevos requisitos, la diferencia fue noche y día comparado con proyectos anteriores en JavaScript puro. El compilador identificó automáticamente cada ubicación donde necesitábamos ajustar código para acomodar los cambios. En JavaScript tradicional, estos problemas habrían aparecido como errores en tiempo de ejecución, posiblemente solo en producción.
 
-\textbf{Binding de datos en MAUI:} El data binding en MAUI con MVVM a veces presentó comportamientos inesperados. Problemas comunes incluyeron propiedades que no se actualizaban en la interfaz por falta de notificación de cambios, y commands que no se ejecutaban por incorrecta configuración de BindingContext. El uso de CommunityToolkit.MVVM con source generators simplificó esto, pero requirió comprensión de cómo funcionan los generadores de código.
+Sin embargo, no todo fue color de rosa con nuestro stack tecnológico. El ecosistema de MAUI, siendo relativamente joven, nos presentó desafíos que no anticipamos completamente. Mientras React Native o Flutter tienen bibliotecas maduras para casi cualquier funcionalidad que puedas imaginar, con MAUI frecuentemente tuvimos que implementar cosas desde cero o adaptar soluciones de Xamarin.Forms con resultados variables. Específicamente, encontrar un buen calendario/date picker que funcionara consistentemente en Android e iOS nos tomó más tiempo del que nos gustaría admitir. Terminamos probando tres bibliotecas diferentes antes de decidir implementar nuestra propia solución usando controles nativos.
 
-\textbf{Optimización de consultas Oracle:} Inicialmente, algunas consultas con múltiples JOINs presentaban rendimiento deficiente. El análisis de planes de ejecución reveló falta de índices apropiados y consultas mal estructuradas. La optimización mediante índices selectivos, refactorización de queries, y uso de stored procedures para lógica compleja mejoró dramáticamente el rendimiento.
+La compatibilidad entre versiones de paquetes NuGet fue otra fuente constante de fricciones pequeñas pero acumulativas. Hubo una actualización particularmente problemática donde Entity Framework Core 9.0.1 tenía un conflicto sutil con Oracle.EntityFrameworkCore 9.21.121. El error solo aparecía en ciertas consultas complejas con múltiples JOINs, lo que hizo que la depuración fuera especialmente difícil. Pasamos dos días rastreando el problema antes de descubrir que había un issue abierto en GitHub y que la solución temporal era fijar una versión específica del provider de Oracle. Estas experiencias nos enseñaron la importancia de tener una estrategia clara de gestión de dependencias y de no actualizar indiscriminadamente.
 
-\subsection{Lecciones aprendidas}
-Este proyecto generó importantes lecciones para el desarrollo de software empresarial:
+Next.js 15 con Server Components fue quizás la parte más innovadora de nuestro stack, pero también la que presentó la curva de aprendizaje más empinada. El modelo mental de separar Server Components y Client Components es fundamentalmente diferente de cómo funcionaba React tradicionalmente, y al principio cometimos muchos errores. Los errores de hidratación eran particularmente frustrantes porque los mensajes de error a menudo no eran muy descriptivos. Recuerdo pasar una mañana completa depurando un error de hidratación que resultó ser causado por usar un hook `useEffect` en lo que pensábamos era un Server Component pero que inadvertidamente se había convertido en Client Component por tener una directiva `'use client'` heredada de un componente padre.
 
-\textbf{Importancia del diseño inicial:} El tiempo invertido en diseño de base de datos, definición de arquitectura y creación de mockups se justificó completamente. Tener un diseño claro antes de codificar redujo significativamente la cantidad de refactorización necesaria posteriormente.
+La solución no fue técnica sino de proceso: creamos convenciones claras de nomenclatura donde los Client Components tenían `.client.tsx` en su nombre de archivo, aunque Next.js no lo requiere. Esta convención simple hizo que fuera inmediatamente obvio al leer código qué componente era qué, y redujo dramáticamente estos errores.
 
-\textbf{Pruebas desde el inicio:} Implementar pruebas unitarias desde el principio, en lugar de dejarlas para el final, facilitó la detección temprana de bugs y mejoró la confianza al realizar cambios. La inversión en infraestructura de testing se amortizó rápidamente.
+\subsection{Desafíos técnicos específicos y lo que nos enseñaron}
+Algunos desafíos técnicos que enfrentamos merecen discusión detallada porque las lecciones que aprendimos de ellos fueron particularmente valiosas.
 
-\textbf{Documentación continua:} Documentar decisiones arquitectónicas y código complejo de manera continua fue más efectivo que intentar documentar todo al final. Los comentarios de código ayudaron durante el desarrollo, no solo después.
+\textbf{La saga de SignalR y las reconexiones:} Implementar SignalR para notificaciones en tiempo real parecía straightforward según la documentación. La realidad fue considerablemente más complicada. El escenario básico funciona perfectamente: estableces conexión, envías mensajes, recibes mensajes. Pero los casos edge donde las cosas se vuelven interesantes son inevitables en producción.
 
-\textbf{Iteración con usuarios:} Las sesiones tempranas de validación con usuarios reales (administradores y ciudadanos de Electrohuila) identificaron problemas de usabilidad que no eran evidentes para el equipo de desarrollo. Incorporar feedback de usuarios mejoró significativamente la calidad del producto final.
+El problema específico que encontramos fue este: cuando un usuario perdía temporalmente conectividad de red (algo común en móviles), SignalR intentaba reconectar automáticamente, lo cual es bueno. Pero si la desconexión duraba más de unos segundos, el servidor limpiaba los grupos a los que estaba suscrito el usuario. Cuando el cliente reconectaba exitosamente, no recibía notificaciones porque ya no estaba en los grupos apropiados. Esto resultó en un bug sutil donde las notificaciones "simplemente no llegaban" de manera intermitente e impredecible.
 
-\textbf{Manejo de dependencias:} Mantener las dependencias actualizadas de manera proactiva previno problemas de seguridad y compatibilidad. Sin embargo, actualizaciones automáticas sin pruebas causaron problemas ocasionales, por lo que se adoptó una política de actualizaciones controladas con pruebas antes de producción.
+La solución requirió implementar un protocolo de reconexión en el cliente que, después de reconectar, explícitamente se resuscribiera a todos los grupos relevantes. También implementamos backoff exponencial para reintentos, empezando con delays cortos y aumentándolos gradualmente para evitar bombardear el servidor. Esta lógica terminó siendo sorprendentemente compleja, con manejo de estados como "conectando", "reconectando", "desconectado-temporalmente", y "desconectado-permanentemente".
 
-\subsection{Aplicabilidad en contextos similares}
-Las decisiones técnicas y la arquitectura implementada en este proyecto son aplicables a otros contextos de sistemas de agendamiento o gestión de citas en el sector público. Los patrones implementados (Clean Architecture, MVVM, comunicación en tiempo real) son transferibles a proyectos similares.
+Cuando desplegamos a múltiples instancias del backend (requerimiento de Electrohuila para alta disponibilidad), descubrimos otro problema: las notificaciones solo llegaban a usuarios conectados a la misma instancia del servidor que generó la notificación. Esto requirió configurar un backplane con Redis para sincronizar mensajes entre instancias. La configuración de Redis fue relativamente simple, pero depurar problemas de conectividad entre instancias en el entorno de staging de Electrohuila fue complejo debido a políticas de firewall y configuraciones de red que inicialmente no comprendíamos completamente.
 
-Para instituciones educativas como el SENA, este proyecto demuestra que es posible desarrollar aplicaciones empresariales de calidad en contextos de formación, siempre que se apliquen rigurosamente principios de ingeniería de software y se cuente con requerimientos claros del negocio.
+En retrospectiva, deberíamos haber considerado estas complejidades desde el diseño inicial. Las notificaciones en tiempo real parecen una funcionalidad simple superficialmente, pero garantizar confiabilidad en escenarios de red impredecibles requiere pensamiento arquitectónico cuidadoso. Si tuviéramos que hacerlo de nuevo, dedicaríamos tiempo específicamente a modelar y probar escenarios de fallo desde el principio.
+
+\textbf{Server Components vs Client Components - más que una distinción técnica:} Como mencioné antes, la diferencia entre Server Components y Client Components en Next.js 15 fue inicialmente confusa. Pero más allá de la confusión técnica, lo que resultó interesante fue cómo esta distinción nos forzó a pensar más cuidadosamente sobre la arquitectura del frontend.
+
+Tradicionalmente en React, hay una tendencia a hacer todo interactivo "por si acaso". Un botón podría tener un hover effect, entonces le agregas estado. Un componente podría necesitar reaccionar a cambios futuros, entonces lo haces reactivo desde el inicio. Con Server Components, esta aproximación no funciona porque Server Components no pueden usar hooks ni estado.
+
+Esto nos forzó a preguntarnos explícitamente para cada componente: "¿realmente necesita interactividad, o es puramente presentacional?" Esta pregunta simple resultó en una arquitectura de frontend más limpia y deliberada. Componentes que genuinamente solo renderizan datos se mantuvieron como Server Components, lo que mejoró el performance porque menos JavaScript se enviaba al cliente. Componentes interactivos eran explícitamente Client Components con responsabilidades claras.
+
+Un caso específico que ilustra esto: teníamos una tabla que mostraba citas agendadas. Inicialmente la hicimos completamente como Client Component porque "obviamente" necesitaría sorting, filtering, etc. Pero cuando implementamos estas funcionalidades, nos dimos cuenta de que para nuestro caso de uso (vistas individuales de usuarios con pocas citas), podíamos hacer el sorting y filtering en el servidor. Refactorizamos la tabla a Server Component, moviendo la lógica de filtrado a query parameters de URL. El resultado fue una tabla más rápida de cargar, con mejor SEO, y que mantenía estado de filtrado en la URL (permitiendo compartir links a vistas filtradas específicas).
+
+\textbf{MAUI data binding y las sutilezas de MVVM:} El patrón MVVM en MAUI fue otro área donde la realidad práctica resultó más compleja que la teoría. El concepto es elegante: separas la vista (XAML) del modelo de vista (C\#) usando data binding, y el framework se encarga de mantener sincronizado la UI con los datos.
+
+En la práctica, el binding tiene reglas específicas que, si no se siguen exactamente, resultan en comportamiento silenciosamente incorrecto. Un problema común que enfrentamos repetidamente: una propiedad en el ViewModel cambia, pero la UI no se actualiza. El culpable casi siempre era olvidar implementar `INotifyPropertyChanged` correctamente o no invocar `OnPropertyChanged()` después de modificar un valor.
+
+Esto se volvió especialmente problemático en propiedades calculadas. Por ejemplo, teníamos una propiedad `CanBookAppointment` que dependía de múltiples otras propiedades (`IsLoggedIn`, `SelectedDate`, `SelectedTime`, etc.). Cada vez que cualquiera de estas propiedades cambiaba, necesitábamos manualmente invocar `OnPropertyChanged(nameof(CanBookAppointment))`. Olvidar una de estas invocaciones resultaba en botones que permanecían deshabilitados cuando deberían estar habilitados, o viceversa.
+
+La solución llegó cuando descubrimos CommunityToolkit.MVVM con sus source generators. En lugar de escribir manualmente todo el boilerplate de `INotifyPropertyChanged`, podías decorar propiedades con atributos como `[ObservableProperty]` y el generator creaba automáticamente todo el código necesario. Para propiedades calculadas, `[NotifyPropertyChangedFor]` permitía declarativamente especificar dependencias.
+
+Esta experiencia nos enseñó una lección más amplia: cuando un framework requiere mucho código boilerplate repetitivo, probablemente existe una herramienta o biblioteca que lo automatiza. No asumas que "así es como se hacen las cosas" solo porque la documentación oficial muestra código manual. La comunidad a menudo desarrolla mejores patrones y herramientas.
+
+\textbf{Performance de Oracle y el arte de la optimización de queries:} Un área donde nuestra inexperiencia inicial fue evidente fue en la optimización de consultas a base de datos. Los primeros queries que escribimos funcionaban correctamente pero, cuando probamos con volúmenes de datos realistas, algunos eran inaceptablemente lentos.
+
+Un caso específico: teníamos una consulta que obtenía todas las citas de un usuario junto con información del servicio solicitado, el funcionario asignado, y el estado de la cita. La implementación inicial en LINQ era limpia y legible:
+
+```csharp
+var appointments = await _context.Appointments
+    .Include(a => a.Service)
+    .Include(a => a.Employee)
+    .Include(a => a.Status)
+    .Where(a => a.UserId == userId)
+    .ToListAsync();
+```
+
+Con 10 citas en base de datos de desarrollo, esta consulta era instantánea. Con 50,000 citas en el ambiente de staging de Electrohuila, tomaba varios segundos. El problema era múltiple: primero, no teníamos índices apropiados en las columnas de foreign keys. Segundo, Entity Framework generaba queries con JOINs que Oracle no optimizaba bien. Tercero, estábamos cargando datos innecesarios (por ejemplo, todas las columnas de Employee cuando solo necesitábamos nombre y ID).
+
+La optimización fue un proceso educativo. Primero, aprendimos a usar `EXPLAIN PLAN` en Oracle para entender exactamente qué estaba haciendo la base de datos. Descubrimos que estaba haciendo table scans completos en lugar de usar índices. Agregamos índices en las foreign keys y columnas frecuentemente filtradas.
+
+Segundo, refactorizamos el query para seleccionar solo columnas necesarias usando projections:
+
+```csharp
+var appointments = await _context.Appointments
+    .Where(a => a.UserId == userId)
+    .Select(a => new AppointmentDto {
+        Id = a.Id,
+        DateTime = a.DateTime,
+        ServiceName = a.Service.Name,
+        EmployeeName = a.Employee.FullName,
+        StatusName = a.Status.Name
+    })
+    .ToListAsync();
+```
+
+Esto redujo el tiempo de ejecución dramáticamente porque transmitíamos menos datos sobre la red y Oracle podía optimizar mejor el plan de ejecución.
+
+Para queries particularmente complejos con lógica de negocio significativa, terminamos creando stored procedures en Oracle. Esto fue controversial en el equipo - algunos argumentaban que movíamos lógica de negocio a la base de datos, violando la arquitectura limpia. Otros argumentaban que queries complejos son una responsabilidad legítima de la capa de datos.
+
+El compromiso al que llegamos fue este: la lógica de negocio permanece en la capa de aplicación, pero agregación y transformación de datos complejas puede hacerse en stored procedures para performance. Los stored procedures se invocan a través de interfaces de repositorio, manteniendo la inversión de dependencias. Esta decisión pragmática nos enseñó que los principios arquitectónicos son guías, no leyes absolutas, y el contexto importa.
+
+\subsection{Lecciones aprendidas - más allá de lo técnico}
+Las lecciones más valiosas que aprendimos a menudo trascendieron lo puramente técnico y tocaron aspectos de proceso, comunicación y trabajo en equipo.
+
+\textbf{El diseño inicial realmente importa, pero no de la manera que pensábamos:} Al inicio del proyecto, dedicamos aproximadamente tres semanas a diseño antes de escribir código de producción. Esto incluyó diseño de base de datos, definición de arquitectura, creación de diagramas de componentes, y desarrollo de mockups de UI. Algunos miembros del equipo sentían que estábamos "perdiendo tiempo" y querían "empezar a programar de verdad".
+
+En retrospectiva, esas tres semanas fueron probablemente las más productivas del proyecto. Pero no exactamente por las razones que esperábamos. El diagrama de base de datos que creamos cuidadosamente terminó siendo modificado significativamente durante el desarrollo - lo cual está bien. Los mockups de UI que diseñamos cambiaron después de feedback de usuarios - también está bien.
+
+El valor real del diseño inicial no fue producir un plan perfecto que luego ejecutamos mecánicamente. El valor fue crear un entendimiento compartido entre el equipo. Las discusiones durante las sesiones de diseño alinearon nuestras expectativas sobre qué estábamos construyendo y por qué. Cuando surgían preguntas durante la implementación, frecuentemente podíamos resolverlas recordando el razonamiento detrás de decisiones de diseño.
+
+Si tuviéramos que hacerlo de nuevo, seríamos más explícitos sobre este propósito. En lugar de tratar el diseño como "crear documentación", lo trataríamos como "desarrollar entendimiento compartido". La documentación es un subproducto útil, pero secundario.
+
+\textbf{Testing temprano vs testing tardío - una diferencia de filosofía:} Una decisión consciente que tomamos fue implementar pruebas unitarias desde el primer momento, no dejarlas para "después cuando tengamos tiempo". Esta decisión no fue unánime - hubo resistencia de algunos miembros que argumentaban que escribir tests ralentizaría el desarrollo inicial.
+
+Los primeros días, parecían tener razón. Escribir un caso de uso simple con sus respectivas pruebas tomaba el doble de tiempo que solo escribir el código. Pero alrededor de la cuarta o quinta semana del proyecto, algo cambió. Empezamos a modificar código existente para nuevos requisitos. Aquí, las pruebas transformaron completamente la experiencia.
+
+Con pruebas, podías refactorizar código confidentemente. Si las pruebas pasaban después de tus cambios, tenías alta confianza de que no habías roto funcionalidad existente. Sin pruebas, cada cambio requería testing manual extensivo, o peor, resultaba en regresiones que solo se descubrían más tarde.
+
+Un momento específico que solidificó el valor de testing para todo el equipo: estábamos modificando la lógica de validación de citas para acomodar nuevos requisitos de negocio. Después de hacer los cambios, ejecutamos las pruebas y 15 tests fallaron. Inicialmente esto pareció desalentador, pero resultó ser invaluable. Cada test que falló identificaba un caso específico que nuestra nueva implementación no manejaba correctamente. Pudimos sistemáticamente revisar cada falla, corregir el código, y verificar que la corrección funcionaba. Sin estas pruebas, cada uno de esos 15 casos habría sido un bug potencial en producción.
+
+\textbf{Documentación continua vs documentación final:} Adoptamos una política de documentar decisiones importantes continuamente usando Architecture Decision Records (ADRs). Cada vez que tomábamos una decisión arquitectónica significativa, creábamos un documento breve describiendo el contexto, la decisión, y el razonamiento.
+
+Inicialmente esto pareció overhead adicional. Pero el valor se manifestó rápidamente cuando nuevos miembros se unieron al proyecto a mitad del camino. En lugar de explicar repetidamente por qué habíamos tomado ciertas decisiones, podíamos simplemente señalar a los ADRs relevantes. Más aún, nosotros mismos consultábamos estos documentos cuando necesitábamos recordar por qué habíamos hecho algo de cierta manera.
+
+Los comentarios en código fueron otra área donde el enfoque continuo superó documentar al final. Código complejo que parecía obvio mientras lo escribías frecuentemente resultaba misterioso algunas semanas después. Comentarios explicando el "por qué" (no el "qué", que debería ser obvio del código mismo) fueron invaluables para mantenimiento futuro.
+
+\textbf{El feedback de usuarios reales es insustituible:} Esto parece obvio, pero la diferencia entre lo que creíamos que querían los usuarios y lo que realmente necesitaban fue frecuentemente sorprendente. Organizamos sesiones de validación con personal de Electrohuila aproximadamente cada dos semanas donde demostrábamos funcionalidad y recibíamos feedback.
+
+Un ejemplo específico: habíamos diseñado el flujo de agendamiento de citas con un proceso de múltiples pasos: primero seleccionas el servicio, luego la fecha, luego la hora, luego confirmas. Nos parecía lógico y bien estructurado. Los usuarios reales encontraron esto tedioso y preferían ver disponibilidad de múltiples días a la vez en un calendario, luego seleccionar un slot específico. Su modelo mental era fundamentalmente diferente al nuestro.
+
+Incorporar este feedback requirió refactorizar significativamente la UI de agendamiento, pero el resultado fue un sistema mucho más usable. Esta experiencia nos enseñó humildad sobre nuestras propias suposiciones y el valor incalculable de validación continua con usuarios reales.
+
+\textbf{Gestión de dependencias - entre estabilidad e innovación:} Nuestra política inicial era mantenernos en versiones estables de todas las dependencias y actualizar conservadoramente. Esto funcionó bien para evitar problemas de compatibilidad, pero significaba que a veces nos perdíamos mejoras importantes.
+
+El punto de inflexión fue cuando Next.js 15 introdujo Server Components. Estábamos en Next.js 14 y la actualización parecía arriesgada a mitad del proyecto. Decidimos hacerla de todos modos, y aunque causó algunos días de trabajo ajustando código, las mejoras de performance y desarrollador experience valieron la pena.
+
+La lección fue que no existe una política de actualización universalmente correcta. Dependencias críticas de infraestructura (base de datos, runtime) deberían ser muy conservadoras. Frameworks y bibliotecas donde las mejoras proporcionan valor directo pueden justificar actualizaciones más agresivas. El contexto y el análisis de riesgo/beneficio son esenciales.
+
+\subsection{Aplicabilidad más allá de este proyecto específico}
+Reflexionando sobre la transferibilidad de este trabajo, vemos aplicabilidad en múltiples dimensiones.
+
+Las decisiones técnicas - Clean Architecture, el stack tecnológico, los patrones de diseño - son ciertamente transferibles a otros proyectos de sistemas de agendamiento o gestión de citas en el sector público. Pero lo que podría ser más valioso son las lecciones de proceso: la importancia de diseño colaborativo inicial, testing temprano, documentación continua, y validación frecuente con usuarios.
+
+Para instituciones educativas como el SENA, este proyecto demuestra que es absolutamente posible desarrollar aplicaciones empresariales de calidad en contextos de formación. Pero requiere varias condiciones: primero, requerimientos de negocio reales y claros, no ejercicios artificiales. Segundo, aplicación rigurosa de principios de ingeniería de software, no solo "programar hasta que funcione". Tercero, tiempo suficiente para iterar y aprender de errores - este no fue un proyecto de seis semanas, sino de varios meses.
+
+La colaboración con Electrohuila fue fundamental para el éxito educativo del proyecto. Tener stakeholders reales con necesidades genuinas proporcionó motivación y contexto que proyectos puramente académicos no pueden replicar. Los aprendices entendieron que su trabajo tendría impacto real en ciudadanos reales, lo cual elevó significativamente el nivel de compromiso y calidad.
+
+En hindsight, si tuviéramos que replicar este modelo de proyecto educativo-empresarial, enfatizaríamos aún más la comunicación continua con stakeholders. Inicialmente teníamos reuniones cada dos semanas; en retrospectiva, sesiones semanales más cortas habrían sido más efectivas. Feedback más frecuente habría prevenido algunos caminos equivocados donde desarrollamos funcionalidad que luego requirió cambios significativos.
+
+También invertiríamos más tiempo en capacitación específica en tecnologías nuevas como MAUI y Next.js Server Components antes de comenzar desarrollo intensivo. Aprender mientras construyes es inevitable y valioso, pero cierta base teórica sólida habría reducido el tiempo gastado en errores triviales por incomprensión de conceptos fundamentales.
+
+Finalmente, un aspecto que subestimamos fue la importancia de configurar ambientes de desarrollo consistentes desde el inicio. Gastamos tiempo significativo depurando problemas que resultaban ser diferencias entre ambientes de desarrollo locales. La adopción temprana de contenedores Docker para servicios compartidos (base de datos, Redis) habría sido valiosa. Implementamos esto eventualmente, pero hacerlo desde el día uno habría prevenido frustraciones.
+
+En conclusión, este proyecto fue tanto un éxito técnico como educativo, pero quizás más importante, fue una experiencia de aprendizaje humilde. Aprendimos que el desarrollo de software no es principalmente sobre código, sino sobre personas: entender usuarios, colaborar en equipos, comunicarse con stakeholders, y aprender continuamente de experiencias. Las tecnologías y herramientas cambian constantemente, pero estas lecciones fundamentales sobre el proceso humano de crear software permanecen relevantes.

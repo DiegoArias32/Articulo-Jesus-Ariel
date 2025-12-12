@@ -2378,10 +2378,12 @@
     <bcf:citekey order="2" intorder="1">rodriguez2023digitalizacion</bcf:citekey>
     <bcf:citekey order="3" intorder="1">martin2017clean</bcf:citekey>
     <bcf:citekey order="4" intorder="1">evans2003domain</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">smith2023aspnet</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">lerman2022entity</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">hermes2023maui</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">jebb2023signalr</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">martin2017clean</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">evans2003domain</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">smith2023aspnet</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">lerman2022entity</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">hermes2023maui</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">jebb2023signalr</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

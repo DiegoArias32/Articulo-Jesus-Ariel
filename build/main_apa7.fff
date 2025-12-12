@@ -3,7 +3,7 @@
 [htbp]
     \centering
     \includegraphics[width=0.48\textwidth]{graphics/inicio_proyecto.png}
-    \caption{Flujo general del proyecto desde el análisis hasta la entrega}
+    \caption{Flujo del proyecto desde análisis hasta implementación}
     \label{fig:inicio_proyecto}
 \end{figure*}
 \efloatseparator
@@ -13,6 +13,6 @@
 [htbp]
     \centering
     \includegraphics[width=0.45\textwidth]{graphics/ciclo_desarrollo.png}
-    \caption{Ciclo iterativo que seguimos durante el desarrollo}
+    \caption{Ciclo iterativo de desarrollo del sistema}
     \label{fig:ciclo_desarrollo}
 \end{figure*}

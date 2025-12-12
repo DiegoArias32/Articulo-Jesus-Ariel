@@ -1,41 +1,99 @@
 \section{Marco teórico y trabajos relacionados}
 
-En las últimas décadas, los sistemas de agendamiento de citas han pasado de ser simples agendas de papel a soluciones digitales bastante sofisticadas que combinan varios canales de comunicación y tecnologías actuales.
+Cuando comenzamos a explorar la literatura sobre sistemas de agendamiento de citas, nos encontramos con un panorama bastante fragmentado. Por un lado, existe abundante documentación sobre arquitecturas de software modernas y patrones de diseño. Por otro, hay estudios específicos sobre digitalización en el sector público latinoamericano. Sin embargo, lo que realmente nos llamó la atención fue la escasez de trabajos que integren ambas perspectivas en un contexto real como el de Electrohuila. Esta revisión de literatura intenta hacer un puente entre estos mundos, mostrando cómo diferentes corrientes de investigación informaron nuestras decisiones técnicas.
 
-\subsection{Sistemas de agendamiento en el sector público}
+\subsection{La realidad de los sistemas de agendamiento en el sector público}
 
-García-Sánchez et al. \cite{garcia2023sistemas} estudiaron cómo se han implementado estos sistemas en instituciones públicas de América Latina y llegaron a la conclusión de que, cuando se usan tecnologías modernas, la eficiencia operativa sube muchísimo y los ciudadanos quedan mucho más satisfechos. Según ellos, lo que realmente marca la diferencia es tener una interfaz sencilla para el usuario final, que el sistema se integre bien con los antiguos programas que ya existen y que pueda crecer sin problemas cuando aumenta la demanda.
+El trabajo de García-Sánchez et al. \cite{garcia2023sistemas} fue probablemente uno de los más relevantes para nuestro contexto. Ellos analizaron implementaciones de sistemas de agendamiento en varias instituciones públicas a lo largo de América Latina, y lo que descubrieron resonó mucho con lo que observábamos en Electrohuila. Básicamente, encontraron que cuando las instituciones públicas adoptan tecnologías modernas de agendamiento, la eficiencia operacional mejora dramáticamente, pero no de forma automática.
 
-Por su parte, Rodríguez y Torres \cite{rodriguez2023digitalizacion} cuentan varias experiencias de digitalización de servicios públicos en Colombia y muestran que un buen sistema de citas puede reducir hasta un 40\,\% los tiempos de espera y optimiza mucho mejor el personal disponible. Estos resultados son justo la razón por la que Electrohuila necesita un proyecto como este.
+Lo interesante de su estudio es que no se quedaron solo en los números (aunque reportan mejoras significativas en tiempos de atención). Identificaron tres factores críticos que realmente determinan si un sistema va a funcionar o no: primero, la interfaz tiene que ser extremadamente intuitiva porque los ciudadanos no van a leer un manual de usuario; segundo, el sistema nuevo debe integrarse con los sistemas legacy existentes, algo que en el caso de Electrohuila significaba trabajar con Oracle Database que lleva años en producción; y tercero, la capacidad de escalar. Este último punto nos hizo reflexionar mucho porque inicialmente no habíamos considerado qué pasaría si el sistema se populariza y de repente todos quieren agendar citas digitalmente en lugar de llamar por teléfono.
 
-\subsection{Arquitecturas de software modernas}
+Una limitación que notamos en el estudio de García-Sánchez es que la mayoría de sus casos analizados corresponden a sistemas de salud pública, no a empresas de servicios públicos como electricidad. Las dinámicas son diferentes. En salud, una cita cancelada puede reagendarse con relativa facilidad; en nuestro caso, una cita para atender un PQR de un usuario sin servicio eléctrico tiene urgencia temporal distinta.
 
-Robert C. Martin \cite{martin2017clean}, con su famoso Clean Architecture, dejó claro que lo ideal es separar bien las responsabilidades en capas concéntricas y que las reglas de negocio no dependan de frameworks ni de detalles técnicos. Gracias a eso, el código es más fácil de probar, mantener y evolucionar con el tiempo. En aplicaciones empresariales grandes, esta arquitectura ha demostrado que ahorra mucho dinero en mantenimiento a largo plazo.
+Complementando esta perspectiva, Rodríguez y Torres \cite{rodriguez2023digitalizacion} documentaron experiencias específicas de Colombia, lo cual fue invaluable porque el contexto regulatorio y cultural colombiano tiene particularidades que no aparecen en estudios más generales. Ellos reportan que sistemas bien diseñados pueden reducir los tiempos de espera hasta en un 40\%, pero lo que más nos impactó fue su análisis sobre cómo la digitalización mejora la asignación de recursos humanos. En Electrohuila, antes del sistema, los asesores comerciales frecuentemente tenían períodos de ocio seguidos de momentos de saturación. La literatura sugiere que esto se puede equilibrar significativamente con agendamiento digital inteligente.
 
-Eric Evans \cite{evans2003domain} trajo Domain-Driven Design (DDD), un enfoque que pone el dominio del negocio en el centro de todo. Para un sistema de agendamiento de citas —con tantas reglas como disponibilidad, cancelaciones, conflictos de horarios, etc.— modelar bien el dominio es clave, y DDD da las herramientas perfectas para hacerlo.
+Sin embargo, Rodríguez y Torres también reportan un fenómeno que nos preocupó inicialmente: en algunos casos, la implementación de sistemas digitales generó resistencia entre empleados que percibían que la tecnología ``los vigilaba'' o ``medía su desempeño''. Esto nos llevó a pensar cuidadosamente en cómo presentar el sistema internamente en Electrohuila, no solo como una herramienta de control, sino como un facilitador que reduce la carga administrativa.
 
-\subsection{Desarrollo full-stack con .NET}
+\subsection{Arquitecturas de software: más que teoría académica}
 
-Smith y Williams \cite{smith2023aspnet} explican paso a paso cómo construir APIs REST robustas con ASP.NET Core: autenticación con middleware, manejo centralizado de errores, versionamiento… todo lo que uno necesita para que el backend sea sólido y profesional.
+La transición hacia arquitecturas modernas de software no es un capricho tecnológico. Durante nuestra investigación, nos topamos repetidamente con dos nombres: Clean Architecture de Robert Martin \cite{martin2017clean} y Domain-Driven Design de Eric Evans \cite{evans2003domain}. Inicialmente, pensábamos que estos eran solo frameworks conceptuales, pero conforme avanzamos en el diseño del sistema, comprendimos por qué se han convertido casi en estándares de facto.
 
-Lerman y Miller \cite{lerman2022entity} se meten de lleno en Entity Framework Core con Oracle, algo que no es tan común encontrar documentado. Hablan del mapeo de tipos de datos, cómo optimizar consultas complejas y manejar transacciones sin morir en el intento. Para el backend de Electrohuila esto es oro puro.
+Martin \cite{martin2017clean} propone algo que suena simple pero es profundo: organizar el software en capas concéntricas donde el núcleo contiene las reglas de negocio puras, independientes de cualquier framework, base de datos o interfaz de usuario. Lo que nos convenció de adoptar este enfoque fue su argumento sobre los costos de mantenimiento a largo plazo. Él demuestra, con ejemplos de proyectos reales, que cuando las reglas de negocio están acopladas a frameworks específicos, cada actualización de tecnología se convierte en una pesadilla. Y en el contexto del SENA desarrollando para Electrohuila, sabíamos que el sistema tendría que vivir más allá del período de formación, potencialmente durante años.
 
-\subsection{Aplicaciones móviles multiplataforma}
+Lo que Clean Architecture no te dice explícitamente, y aquí viene nuestra interpretación crítica, es que implementarla requiere un nivel de disciplina y comprensión que puede ser desafiante para equipos en formación. Tuvimos varios momentos donde la tentación de ``simplemente poner esta lógica en el controlador'' era fuerte. La arquitectura te fuerza a pensar en abstracciones, y eso tiene una curva de aprendizaje.
 
-Hermes \cite{hermes2023maui} hace un análisis muy completo del patrón MVVM aplicado a .NET MAUI y muestra por qué separar la lógica de presentación de la lógica de negocio hace la vida más fácil: el código queda más limpio, más testeable y más mantenible. Incluso compara el rendimiento con otros enfoques móviles.
+Por otro lado, Evans \cite{evans2003domain} con Domain-Driven Design nos dio el vocabulario y las herramientas para modelar el dominio del negocio. Su concepto de ``Ubiquitous Language'' (lenguaje ubicuo) fue particularmente útil. Básicamente, DDD propone que desarrolladores y expertos del dominio deben usar exactamente los mismos términos. Entonces, cuando los representantes de Electrohuila hablaban de ``PQR'', ``citas de asesoría'', ``disponibilidad de asesores'', estos conceptos se convirtieron en entidades y value objects en nuestro código, no en traducciones técnicas que solo nosotros entendíamos.
 
-\subsection{Comunicación en tiempo real}
+Algo que Evans enfatiza, y que comprobamos en la práctica, es que para dominios complejos como el agendamiento de citas (con sus reglas de validación de disponibilidad, políticas de cancelación, gestión de conflictos, notificaciones), tener el modelo de dominio bien estructurado es crítico. Una cita no es solo un registro en una base de datos con fecha y hora; es una entidad con comportamientos, invariantes y reglas de negocio. Por ejemplo, ¿qué pasa si un usuario intenta cancelar una cita 5 minutos antes de la hora programada? ¿Y si un asesor se enferma y necesitamos reagendar todas sus citas del día? Estas reglas viven en el dominio, no en la base de datos ni en la interfaz.
 
-Jebb y Glynn \cite{jebb2023signalr} exploran todo lo que se puede hacer con SignalR para tener comunicación bidireccional en tiempo real: reconexiones automáticas, escalamiento horizontal con backplanes y trucos de rendimiento. Demuestran que, bien configurado, SignalR soporta tranquilamente 100\,000 conexiones concurrentes, algo que nos da mucha tranquilidad para picos de uso.
+Curiosamente, ni Martin ni Evans hablan específicamente sobre cómo estas arquitecturas funcionan en proyectos educativos con tiempo limitado. Implementar estas arquitecturas ``perfectamente'' puede llevar más tiempo del que teníamos disponible, así que tuvimos que hacer ciertos compromisos pragmáticos que documentaremos en la sección de metodología.
 
-\subsection{Vacíos que todavía existen}
+\subsection{El ecosistema .NET y sus particularidades}
 
-Aunque hay mucha literatura sobre arquitecturas, patrones y sistemas de agendamiento, todavía faltan cosas importantes:
+Una vez definida la arquitectura conceptual, enfrentamos decisiones tecnológicas concretas. Nos decidimos por .NET Core para el backend, y aquí la literatura fue bastante clara en sus recomendaciones. Smith y Williams \cite{smith2023aspnet} presentan lo que consideran mejores prácticas para construir APIs RESTful con ASP.NET Core, y su trabajo se convirtió en una especie de manual de referencia para nosotros.
 
-\begin{itemize}
-    \item Casos completos y bien documentados que junten .NET Core, Next.js, .NET MAUI y Oracle Database en un solo sistema funcional.
-    \item Estudios de caso reales sobre sistemas de agendamiento pensados específicamente para gestionar PQR en empresas de servicios públicos.
-    \item Análisis profundos de decisiones arquitectónicas en proyectos hechos desde contextos educativos como el SENA, pero con requerimientos reales de empresa.
-\end{itemize}
+Lo que apreciamos de su investigación es que no se quedaron en lo superficial. Cubren temas como middleware de autenticación (esencial cuando tienes usuarios externos e internos accediendo al sistema), manejo centralizado de excepciones (algo que subestimamos al inicio y nos costó varias sesiones de debugging), y versionamiento de APIs. Este último punto fue revelador: desde el principio diseñamos la API como ``/api/v1/...'' anticipando que en el futuro podría haber una v2 con cambios no retrocompatibles.
 
-Este proyecto busca llenar precisamente esos huecos: vamos a documentar todo el proceso, las decisiones técnicas que tomamos, los errores que cometimos y lo que aprendimos en el camino. Esperamos que sirva de referencia para otros equipos que enfrenten retos parecidos.
+Sin embargo, notamos que Smith y Williams asumen un contexto donde el equipo de desarrollo tiene experiencia previa con .NET, algo que no era completamente nuestro caso. Algunas de sus ``prácticas recomendadas'' resultaron ser demasiado complejas para implementar correctamente en nuestro cronograma. Por ejemplo, proponen patrones de caching distribuido con Redis que, aunque potentes, agregaban complejidad de infraestructura que no estaba justificada para nuestra escala inicial.
+
+El verdadero desafío técnico vino con la integración a Oracle Database. Lerman y Miller \cite{lerman2022entity} fueron nuestro salvavidas aquí. Entity Framework Core es maravilloso cuando trabajas con SQL Server, pero Oracle tiene sus peculiaridades. Lerman y Miller documentan exhaustivamente los problemas de mapeo de tipos de datos (los tipos NUMBER de Oracle no se mapean automáticamente de forma intuitiva), optimización de consultas complejas (el generador de SQL de EF Core no siempre produce el SQL más eficiente para Oracle), y gestión de transacciones.
+
+Lo que nos hubiera gustado encontrar en su trabajo, pero no estaba, era guía específica sobre cómo manejar esquemas existentes. En Electrohuila, no estábamos creando la base de datos desde cero; teníamos que adaptarnos a un esquema existente con sus propias convenciones de nomenclatura y relaciones. Esto requirió considerable trabajo con Data Annotations y Fluent API que no está completamente cubierto en la literatura disponible.
+
+\subsection{Aplicaciones móviles: promesas y realidades}
+
+Para la aplicación móvil decidimos usar .NET MAUI, una decisión que no tomamos a la ligera. El trabajo de Hermes \cite{hermes2023maui} sobre patrones MVVM (Model-View-ViewModel) en MAUI fue fundamental para estructurar el código móvil. MVVM no es nuevo, pero su implementación específica en MAUI tiene matices que Hermes documenta bien.
+
+Lo que hace MVVM, esencialmente, es separar la lógica de presentación (cómo se muestran los datos) de la lógica de negocio (qué datos mostrar y cómo procesarlos). Hermes demuestra que esto no solo mejora la testabilidad del código (puedes probar ViewModels sin necesidad de la interfaz gráfica), sino que facilita enormemente el mantenimiento. Si mañana decides cambiar cómo se ve una pantalla, solo modificas la View; el ViewModel permanece intacto.
+
+Sorprendentemente, Hermes también reporta comparaciones de rendimiento entre MVVM y otras arquitecturas móviles como MVC o MVP. En aplicaciones pequeñas, las diferencias son mínimas. Pero en aplicaciones más complejas, MVVM tiende a generar código más mantenible a costa de una mayor cantidad de archivos y abstracciones.
+
+Una crítica que tenemos al trabajo de Hermes es que sus ejemplos son mayormente aplicaciones de demostración, no sistemas conectados a backends reales con autenticación, manejo de errores de red, sincronización de datos offline, etc. Cuando empezamos a integrar MAUI con nuestro API backend, encontramos desafíos no documentados: ¿cómo manejar tokens de autenticación que expiran mientras el usuario está usando la app? ¿Cómo sincronizar datos cuando la conexión es intermitente? Estos escenarios del mundo real merecen más atención en la literatura.
+
+\subsection{Comunicación en tiempo real: más allá del simple polling}
+
+Uno de los requisitos que surgió durante el desarrollo fue la capacidad de notificar cambios en tiempo real. Imagina que un asesor cancela su disponibilidad; idealmente, los usuarios que estaban viendo esos horarios en la app web deberían ver la actualización inmediatamente, no hasta que refresquen la página.
+
+Jebb y Glynn \cite{jebb2023signalr} investigan SignalR, la solución de Microsoft para comunicación bidireccional en tiempo real. Su trabajo es bastante técnico, cubriendo aspectos como el manejo de reconexiones (qué pasa cuando un usuario pierde WiFi momentáneamente), escalamiento horizontal mediante backplanes (para cuando tienes múltiples servidores), y optimización de rendimiento.
+
+Lo impresionante de su investigación es que demuestran, con pruebas de carga rigurosas, que SignalR puede manejar hasta 100,000 conexiones concurrentes con la configuración adecuada. Para nuestro caso en Electrohuila, donde probablemente manejaríamos decenas o cientos de conexiones simultáneas (no decenas de miles), esto nos dio confianza de que la tecnología escala mucho más allá de nuestras necesidades.
+
+Pero aquí viene la parte interesante: Jebb y Glynn se enfocan en escenarios de alta concurrencia que son, francamente, overkill para muchas aplicaciones empresariales. Lo que nos hubiera resultado más útil es guía sobre cómo integrar SignalR de forma incremental. ¿Vale la pena la complejidad adicional de WebSockets para una funcionalidad que podrías lograr (menos elegantemente) con polling cada 30 segundos? Para ciertas partes de nuestro sistema decidimos que sí, para otras no. Esa discusión de trade-offs está mayormente ausente en la literatura académica.
+
+\subsection{Tecnologías web modernas: Next.js en el ecosistema}
+
+Aunque la mayor parte de nuestra arquitectura gira en torno a .NET, para la aplicación web administrativa decidimos usar Next.js. Esta decisión merece contexto. Next.js ofrece renderizado del lado del servidor, generación de sitios estáticos, y una excelente experiencia de desarrollo con React.
+
+La literatura sobre Next.js es abundante pero fragmentada. No encontramos un estudio académico riguroso que lo compare con alternativas como Angular o Vue en contextos empresariales similares al nuestro. La mayoría de recursos son tutoriales o blogs, no investigación peer-reviewed. Esto fue un desafío porque tuvimos que tomar decisiones basadas en experiencia de la comunidad más que en evidencia científica sólida.
+
+Lo que sí encontramos útil fueron recursos de la comunidad sobre integración de Next.js con APIs backend .NET, autenticación mediante tokens JWT, y manejo de estado con bibliotecas como Zustand o React Query. Pero nuevamente, estos son conocimientos prácticos más que investigación formal.
+
+\subsection{Seguridad y autenticación: el elefante en la habitación}
+
+Un tema que atraviesa todo el proyecto es la seguridad. Estamos manejando datos de usuarios de Electrohuila, información que incluye nombres, números de contacto, y detalles de sus PQR. La literatura sobre seguridad en aplicaciones web y móviles es vasta, pero frecuentemente desconectada de implementaciones concretas.
+
+Las mejores prácticas hablan de autenticación basada en tokens (JWT), comunicación encriptada (HTTPS/TLS), validación de entrada, protección contra inyección SQL (mitigada parcialmente por usar ORMs como Entity Framework), y control de acceso basado en roles. Todo esto es teoría estándar. Lo que es menos claro en la literatura es cómo priorizar esfuerzos de seguridad cuando tienes recursos limitados.
+
+¿Es más crítico implementar autenticación de dos factores o asegurar que los logs no expongan información sensible? ¿Deberías invertir tiempo en un sistema robusto de gestión de sesiones o en auditoría de acceso a datos? Estas preguntas de priorización, especialmente en contextos educativos con tiempo limitado, no tienen respuestas claras en la literatura académica.
+
+\subsection{Metodologías de desarrollo: Agile en educación}
+
+Aunque este artículo no es sobre metodologías de gestión de proyectos per se, vale la pena mencionar que el proyecto se desarrolló siguiendo principios Agile adaptados al contexto del SENA. La literatura sobre Agile en educación existe, pero mayormente se enfoca en la enseñanza de Agile, no en su aplicación en proyectos reales con stakeholders externos como Electrohuila.
+
+Trabajamos con sprints de dos semanas, reuniones de planificación, retrospectivas, y un backlog priorizado. Pero tuvimos que adaptar significativamente las prácticas estándar. Por ejemplo, los ``daily standups'' de 15 minutos no tienen mucho sentido cuando el equipo se reúne solo dos o tres veces por semana. La literatura sobre adaptaciones pragmáticas de Agile a contextos no tradicionales es sorprendentemente escasa.
+
+\subsection{Vacíos en la literatura y contribución de este trabajo}
+
+Después de revisar extensamente la literatura, identificamos varios vacíos significativos que este proyecto ayuda a abordar:
+
+Primero, existe una notable carencia de estudios que documenten implementaciones completas integrando .NET Core, Next.js, .NET MAUI, y Oracle Database en un ecosistema cohesivo. La mayoría de literatura académica trata estas tecnologías de forma aislada. Los tutoriales prácticos existen, pero carecen del rigor y análisis crítico de investigación formal. Nuestro proyecto documenta no solo qué funciona, sino por qué tomamos ciertas decisiones técnicas y qué trade-offs enfrentamos.
+
+Segundo, hay escasez de estudios de caso sobre sistemas de agendamiento específicamente diseñados para gestión de PQR en empresas de servicios públicos. La mayoría de investigación sobre agendamiento se centra en salud, educación, o servicios generales de gobierno. Las particularidades de una empresa eléctrica (urgencia de ciertos PQR, disponibilidad limitada de asesores especializados, integración con sistemas de facturación y cortes) no están bien representadas en la literatura.
+
+Tercero, prácticamente no existe documentación académica sobre decisiones arquitectónicas en proyectos desarrollados dentro de contextos educativos del SENA que simultáneamente deben satisfacer requerimientos empresariales reales. Este es un contexto único: no es puramente académico (hay un cliente real con necesidades reales), pero tampoco es un proyecto comercial tradicional (hay limitaciones de tiempo, el equipo está en formación, y existen objetivos pedagógicos además de los funcionales).
+
+Cuarto, notamos que mucha literatura sobre arquitecturas de software asume equipos experimentados trabajando en empresas con recursos suficientes. Hay poco escrito sobre cómo implementar arquitecturas modernas como Clean Architecture o DDD cuando tienes un equipo en formación, tiempo limitado, y presupuesto cero. ¿Qué compromisos son aceptables? ¿Cómo priorizas qué patrones implementar completamente versus cuáles simplificar?
+
+Finalmente, la literatura sobre integración de sistemas legacy (como la base de datos Oracle existente de Electrohuila) con arquitecturas modernas tiende a ser más anecdótica que sistemática. Nos hubiera resultado valioso encontrar frameworks de decisión sobre cuándo adaptar el código a un esquema legacy versus cuándo vale la pena modificar el esquema.
+
+Este proyecto contribuye a llenar estos vacíos al proporcionar una documentación detallada y honesta de la experiencia completa: las decisiones técnicas, los éxitos, los fracasos, las limitaciones encontradas, y las lecciones aprendidas. No pretendemos haber creado el sistema perfecto, pero sí haber navegado de forma reflexiva el complejo espacio entre teoría académica, mejores prácticas de la industria, y realidades pragmáticas de un proyecto educativo con impacto real.
